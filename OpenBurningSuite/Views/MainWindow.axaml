@@ -1,0 +1,360 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:OpenBurningSuite.Views"
+        x:Class="OpenBurningSuite.Views.MainWindow"
+        Title="Open Burning Suite"
+        Width="1280" Height="820"
+        MinWidth="1280" MinHeight="820"
+        Background="#0C1622"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <!-- Title bar -->
+        <Border Grid.Row="0" Background="#0A1520" Padding="16,10"
+                BorderBrush="#1E3450" BorderThickness="0,0,0,1">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <Image Source="avares://OpenBurningSuite/icon.png" Width="32" Height="32" VerticalAlignment="Center"/>
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="Open Burning Suite"
+                                   FontSize="18" FontWeight="Bold"
+                                   Foreground="#5BC0FF"/>
+                        <TextBlock Text="专业光盘制作与刻录"
+                                   FontSize="10" Foreground="#5A7A9A" Margin="0,-1,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Quick action buttons in title bar -->
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="6"
+                            VerticalAlignment="Center">
+                    <Button x:Name="BtnHomeNav" Content="🏠" FontSize="16"
+                            Classes="NavBtn" Click="OnHomeClick"
+                            ToolTip.Tip="返回主界面"/>
+                    <Button x:Name="BtnSettingsNav" FontSize="16"
+                            Classes="NavBtn" Click="OnSettingsClick"
+                            ToolTip.Tip="应用设置与首选项"
+                            MinWidth="40" MinHeight="32">
+                        <TextBlock Text="⚙&#xFE0F;" FontSize="16"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Button>
+                    <Button x:Name="BtnHelpNav" Content="❓" FontSize="16"
+                            Classes="NavBtn" Click="OnHelpClick"
+                            ToolTip.Tip="帮助与文档"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Main layout: sidebar + content -->
+        <Grid Grid.Row="1" ColumnDefinitions="220,*">
+
+            <!-- Sidebar -->
+            <Border Grid.Column="0" Background="#0A1520"
+                    BorderBrush="#1E3450" BorderThickness="0,0,1,0">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Margin="10,16,10,0" Spacing="2">
+                        <TextBlock Text="主菜单"
+                                   Foreground="#5A7A9A" FontSize="10"
+                                   FontWeight="Bold" Margin="8,0,0,6"/>
+
+                        <Button x:Name="BtnHome" Content="🏠  主页"
+                                Classes="NavBtn" Click="OnHomeClick"
+                                ToolTip.Tip="主界面 — 快速访问所有功能"/>
+                        <Button x:Name="BtnDiscover" Content="🔍  发现"
+                                Classes="NavBtn" Click="OnDiscoverClick"
+                                ToolTip.Tip="扫描光驱并检测已插入的光盘"/>
+                        <Button x:Name="BtnRead" Content="💿  复制光盘"
+                                Classes="NavBtn" Click="OnReadClick"
+                                ToolTip.Tip="将光盘复制为镜像文件（ISO、BIN/CUE、MDF 等）"/>
+                        <Button x:Name="BtnBuild" Content="🏗  构建镜像"
+                                Classes="NavBtn" Click="OnBuildClick"
+                                ToolTip.Tip="从文件创建光盘镜像（数据、音频、视频、游戏）"/>
+                        <Button x:Name="BtnWrite" Content="🔥  刻录 / 写入"
+                                Classes="NavBtn" Click="OnWriteClick"
+                                ToolTip.Tip="将光盘镜像刻录到 CD、DVD、HD DVD 或蓝光光盘"/>
+                        <Button x:Name="BtnVerify" Content="✅  校验"
+                                Classes="NavBtn" Click="OnVerifyClick"
+                                ToolTip.Tip="校验光盘完整性或将光盘与镜像对比"/>
+                        <Button x:Name="BtnAdvanced"
+                                Classes="NavBtn" Click="OnAdvancedClick"
+                                ToolTip.Tip="高级光盘工具 — 擦除可重写光盘">
+                            <TextBlock Text="⚙️  高级" FontSize="13"/>
+                        </Button>
+
+                        <TextBlock Text="快速开始"
+                                   Foreground="#5A7A9A" FontSize="10"
+                                   FontWeight="Bold" Margin="8,16,0,6"/>
+
+                        <Button x:Name="BtnAudioWizard" Content="🎵  音频与音乐向导"
+                                Classes="NavBtn" Click="OnAudioWizardClick"
+                                ToolTip.Tip="创建音频 CD、将音乐刻录到光盘或抓取音频 CD 的分步向导"/>
+
+                        <Button x:Name="BtnVideoWizard" Content="🎬  视频光盘向导"
+                                Classes="NavBtn" Click="OnVideoWizardClick"
+                                ToolTip.Tip="创建 DVD-Video、蓝光、VCD 或 SVCD 光盘的分步向导"/>
+
+                        <Button x:Name="BtnDataWizard" Content="📁  数据光盘向导"
+                                Classes="NavBtn" Click="OnDataWizardClick"
+                                ToolTip.Tip="从文件和文件夹创建并刻录数据光盘的分步向导"/>
+
+                        <Button x:Name="BtnGameWizard" Content="🎮  游戏光盘向导"
+                                Classes="NavBtn" Click="OnGameWizardClick"
+                                ToolTip.Tip="从镜像文件或文件夹创建并刻录游戏光盘的分步向导"/>
+                        <Button x:Name="BtnCopyWizard" Content="💿  复制光盘向导"
+                                Classes="NavBtn" Click="OnCopyWizardClick"
+                                ToolTip.Tip="将光盘复制为镜像文件的分步向导"/>
+                        <Button x:Name="BtnBlankWizard" Content="🧹  擦除光盘向导"
+                                Classes="NavBtn" Click="OnBlankWizardClick"
+                                ToolTip.Tip="擦除可重写光盘的分步向导"/>
+
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <!-- Content panel (views swap here) -->
+            <Grid Grid.Column="1" Background="#0C1622">
+
+                <!-- HOME SCREEN -->
+                <ScrollViewer x:Name="HomeScreen" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="28,24" Spacing="24">
+
+                        <!-- Welcome header -->
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="欢迎使用 Open Burning Suite"
+                                       FontSize="26" FontWeight="Bold" Foreground="#5BC0FF"/>
+                            <TextBlock Text="专业的光盘制作、刻录、读取与校验工具。"
+                                       FontSize="13" Foreground="#5A7A9A" TextWrapping="Wrap"/>
+                        </StackPanel>
+
+                        <!-- Quick Start Category Tiles -->
+                        <TextBlock Text="快速开始" Foreground="#5A7A9A" FontSize="11"
+                                   FontWeight="Bold" Margin="0,4,0,0"/>
+
+                        <WrapPanel Orientation="Horizontal">
+                            <!-- Burn Data -->
+                            <Button Classes="NavBtn" Margin="0,0,10,10"
+                                    Width="190" Height="100"
+                                    HorizontalContentAlignment="Center"
+                                    Click="OnWriteClick"
+                                    ToolTip.Tip="将光盘镜像文件刻录到 CD、DVD 或蓝光光盘">
+                                <StackPanel HorizontalAlignment="Center" Spacing="6">
+                                    <TextBlock Text="🔥" FontSize="32" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="刻录镜像" FontSize="13" FontWeight="SemiBold"
+                                               HorizontalAlignment="Center" Foreground="#E8F0FE"/>
+                                </StackPanel>
+                            </Button>
+
+                            <!-- Build ISO -->
+                            <Button Classes="NavBtn" Margin="0,0,10,10"
+                                    Width="190" Height="100"
+                                    HorizontalContentAlignment="Center"
+                                    Click="OnBuildClick"
+                                    ToolTip.Tip="从文件和文件夹创建新的光盘镜像">
+                                <StackPanel HorizontalAlignment="Center" Spacing="6">
+                                    <TextBlock Text="🏗" FontSize="32" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="构建镜像" FontSize="13" FontWeight="SemiBold"
+                                               HorizontalAlignment="Center" Foreground="#E8F0FE"/>
+                                </StackPanel>
+                            </Button>
+
+                            <!-- Read Disc -->
+                            <Button Classes="NavBtn" Margin="0,0,10,10"
+                                    Width="190" Height="100"
+                                    HorizontalContentAlignment="Center"
+                                    Click="OnReadClick"
+                                    ToolTip.Tip="将光盘复制为镜像文件以备份或归档">
+                                <StackPanel HorizontalAlignment="Center" Spacing="6">
+                                    <TextBlock Text="💿" FontSize="32" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="复制光盘" FontSize="13" FontWeight="SemiBold"
+                                               HorizontalAlignment="Center" Foreground="#E8F0FE"/>
+                                </StackPanel>
+                            </Button>
+
+                            <!-- Verify -->
+                            <Button Classes="NavBtn" Margin="0,0,10,10"
+                                    Width="190" Height="100"
+                                    HorizontalContentAlignment="Center"
+                                    Click="OnVerifyClick"
+                                    ToolTip.Tip="校验光盘完整性或将光盘与镜像文件对比">
+                                <StackPanel HorizontalAlignment="Center" Spacing="6">
+                                    <TextBlock Text="✅" FontSize="32" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="校验光盘" FontSize="13" FontWeight="SemiBold"
+                                               HorizontalAlignment="Center" Foreground="#E8F0FE"/>
+                                </StackPanel>
+                            </Button>
+
+                            <!-- Discover Drives -->
+                            <Button Classes="NavBtn" Margin="0,0,10,10"
+                                    Width="190" Height="100"
+                                    HorizontalContentAlignment="Center"
+                                    Click="OnDiscoverClick"
+                                    ToolTip.Tip="扫描光驱并检查光盘信息">
+                                <StackPanel HorizontalAlignment="Center" Spacing="6">
+                                    <TextBlock Text="🔍" FontSize="32" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="发现光驱" FontSize="13" FontWeight="SemiBold"
+                                               HorizontalAlignment="Center" Foreground="#E8F0FE"/>
+                                </StackPanel>
+                            </Button>
+
+                            <!-- Copy Disc Wizard -->
+                            <Button Classes="NavBtn" Margin="0,0,10,10"
+                                    Width="190" Height="100"
+                                    HorizontalContentAlignment="Center"
+                                    Click="OnCopyWizardClick"
+                                    ToolTip.Tip="将光盘复制为镜像文件的分步向导">
+                                <StackPanel HorizontalAlignment="Center" Spacing="6">
+                                    <TextBlock Text="📀" FontSize="32" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="复制光盘向导" FontSize="13" FontWeight="SemiBold"
+                                               HorizontalAlignment="Center" Foreground="#E8F0FE"/>
+                                </StackPanel>
+                            </Button>
+
+                            <!-- Blank Disc Wizard -->
+                            <Button Classes="NavBtn" Margin="0,0,10,10"
+                                    Width="190" Height="100"
+                                    HorizontalContentAlignment="Center"
+                                    Click="OnBlankWizardClick"
+                                    ToolTip.Tip="擦除可重写光盘的分步向导">
+                                <StackPanel HorizontalAlignment="Center" Spacing="6">
+                                    <TextBlock Text="🧹" FontSize="32" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="擦除光盘" FontSize="13" FontWeight="SemiBold"
+                                               HorizontalAlignment="Center" Foreground="#E8F0FE"/>
+                                </StackPanel>
+                            </Button>
+                        </WrapPanel>
+
+                        <!-- Feature Categories -->
+                        <TextBlock Text="功能特性" Foreground="#5A7A9A" FontSize="11"
+                                   FontWeight="Bold" Margin="0,4,0,0"/>
+
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto">
+
+                            <!-- Burn & Write -->
+                            <Border Grid.Row="0" Grid.Column="0" Classes="Card" Margin="0,0,8,8">
+                                <StackPanel Spacing="8">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <TextBlock Text="🔥" FontSize="18"/>
+                                        <TextBlock Text="刻录与写入" Classes="SectionHeader"/>
+                                    </StackPanel>
+                                    <TextBlock Text="将 ISO、BIN/CUE、NRG、MDF、CDI 镜像写入 CD-R/RW、DVD±R/RW、HD DVD 和蓝光光盘。支持 DAO、TAO、SAO 写入模式、多区段、超刻、缓存欠载保护以及 M-DISC 归档盘。"
+                                               Foreground="#8EAFC8" FontSize="11" TextWrapping="Wrap"/>
+                                    <Button Content="打开刻录视图 →" Classes="ActionBtn"
+                                            Click="OnWriteClick"
+                                            ToolTip.Tip="跳转到刻录/写入视图"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Build -->
+                            <Border Grid.Row="0" Grid.Column="1" Classes="Card" Margin="0,0,0,8">
+                                <StackPanel Spacing="8">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <TextBlock Text="🏗" FontSize="18"/>
+                                        <TextBlock Text="构建光盘镜像" Classes="SectionHeader"/>
+                                    </StackPanel>
+                                    <TextBlock Text="创建数据光盘（ISO 9660、Joliet、UDF、Rock Ridge、HFS+）、带 CD-TEXT 文本的音频 CD、视频 CD（VCD/SVCD）、DVD-Video、蓝光，以及采用 El Torito 引导的可启动光盘。"
+                                               Foreground="#8EAFC8" FontSize="11" TextWrapping="Wrap"/>
+                                    <Button Content="打开构建视图 →" Classes="ActionBtn"
+                                            Click="OnBuildClick"
+                                            ToolTip.Tip="跳转到构建镜像视图"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Read & Dump -->
+                            <Border Grid.Row="1" Grid.Column="0" Classes="Card" Margin="0,0,8,8">
+                                <StackPanel Spacing="8">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <TextBlock Text="💿" FontSize="18"/>
+                                        <TextBlock Text="复制与转储" Classes="SectionHeader"/>
+                                    </StackPanel>
+                                    <TextBlock Text="将光盘复制为 ISO、BIN/CUE、MDF/MDS、NRG、CDI、CCD、TOC/BIN 格式。支持 2352 字节原始扇区转储、子通道提取、精确抓取模式以及游戏机预设。"
+                                               Foreground="#8EAFC8" FontSize="11" TextWrapping="Wrap"/>
+                                    <Button Content="打开复制视图 →" Classes="ActionBtn"
+                                            Click="OnReadClick"
+                                            ToolTip.Tip="跳转到复制光盘视图"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Verify -->
+                            <Border Grid.Row="1" Grid.Column="1" Classes="Card" Margin="0,0,0,8">
+                                <StackPanel Spacing="8">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <TextBlock Text="✅" FontSize="18"/>
+                                        <TextBlock Text="校验与检查" Classes="SectionHeader"/>
+                                    </StackPanel>
+                                    <TextBlock Text="使用 SHA256、SHA1、MD5、SHA512 或 CRC32 校验和验证光盘完整性。支持逐扇区比对、子通道校验和音轨验证。"
+                                               Foreground="#8EAFC8" FontSize="11" TextWrapping="Wrap"/>
+                                    <Button Content="打开校验视图 →" Classes="ActionBtn"
+                                            Click="OnVerifyClick"
+                                            ToolTip.Tip="跳转到校验视图"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Gaming -->
+                            <Border Grid.Row="2" Grid.Column="0" Classes="Card" Margin="0,0,8,0">
+                                <StackPanel Spacing="8">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <TextBlock Text="🎮" FontSize="18"/>
+                                        <TextBlock Text="游戏光盘支持" Classes="SectionHeader"/>
+                                    </StackPanel>
+                                    <TextBlock Text="内置 PlayStation 1-5、Sega Saturn/Dreamcast/Mega CD、Xbox/360、GameCube/Wii、Neo Geo CD、3DO、PC Engine、Atari Jaguar、Amiga CD32/CDTV 等预设。"
+                                               Foreground="#8EAFC8" FontSize="11" TextWrapping="Wrap"/>
+                                    <Button Content="打开构建视图 →" Classes="ActionBtn"
+                                            Click="OnBuildClick"
+                                            ToolTip.Tip="使用针对各游戏机的预设构建游戏光盘镜像"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Advanced -->
+                            <Border Grid.Row="2" Grid.Column="1" Classes="Card" Margin="0,0,0,0">
+                                <StackPanel Spacing="8">
+                                    <StackPanel Orientation="Horizontal" Spacing="8">
+                                        <TextBlock Text="⚙&#xFE0F;" FontSize="18"/>
+                                        <TextBlock Text="高级功能" Classes="SectionHeader"/>
+                                    </StackPanel>
+                                    <TextBlock Text="擦除可重写光盘（快速/完全擦除）、封盘、M-DISC 归档盘、LibCrypt/全区补丁、原始扇区 I/O 以及跨平台 SCSI/MMC 指令访问。"
+                                               Foreground="#8EAFC8" FontSize="11" TextWrapping="Wrap"/>
+                                    <Button Content="打开高级视图 →" Classes="ActionBtn"
+                                            Click="OnAdvancedClick"
+                                            ToolTip.Tip="访问擦除、封盘等高级光盘功能"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- Actual views (hidden by default, shown on nav) -->
+                <views:DiscoverView x:Name="ViewDiscover" IsVisible="False"/>
+                <views:ReadView     x:Name="ViewRead"     IsVisible="False"/>
+                <views:BuildView    x:Name="ViewBuild"    IsVisible="False"/>
+                <views:WriteView    x:Name="ViewWrite"    IsVisible="False"/>
+                <views:VerifyView   x:Name="ViewVerify"   IsVisible="False"/>
+                <views:AdvancedView x:Name="ViewAdvanced" IsVisible="False"/>
+                <views:AudioWizardView x:Name="ViewAudioWizard" IsVisible="False"/>
+                <views:VideoWizardView x:Name="ViewVideoWizard" IsVisible="False"/>
+                <views:DataWizardView x:Name="ViewDataWizard" IsVisible="False"/>
+                <views:GameWizardView x:Name="ViewGameWizard" IsVisible="False"/>
+                <views:CopyWizardView x:Name="ViewCopyWizard" IsVisible="False"/>
+                <views:BlankWizardView x:Name="ViewBlankWizard" IsVisible="False"/>
+                <views:HelpView x:Name="ViewHelp" IsVisible="False"/>
+                <views:SettingsView x:Name="ViewSettings" IsVisible="False"/>
+            </Grid>
+        </Grid>
+
+        <!-- Status bar -->
+        <Border Grid.Row="2" Background="#060D18"
+                BorderBrush="#1E3450" BorderThickness="0,1,0,0"
+                Padding="12,6">
+            <Grid ColumnDefinitions="*,Auto">
+                <TextBlock x:Name="TxtStatus"
+                           Text="就绪 — 请选择一个操作开始。"
+                           Foreground="#5A7A9A" FontSize="11"
+                           VerticalAlignment="Center"/>
+                <TextBlock x:Name="TxtElevation"
+                           Grid.Column="1"
+                           Foreground="#5A7A9A" FontSize="11"
+                           VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+    </Grid>
+
+</Window>

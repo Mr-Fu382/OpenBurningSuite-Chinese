@@ -1,0 +1,691 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:views="clr-namespace:OpenBurningSuite.Views"
+             x:Class="OpenBurningSuite.Views.AudioWizardView">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="28,24" Spacing="20">
+
+            <!-- Page header -->
+            <StackPanel Spacing="4">
+                <TextBlock Text="🎵  音频与音乐向导"
+                           Classes="PageTitle" Foreground="#5BC0FF"/>
+                <TextBlock Text="创建音频 CD、将音乐文件复制到光盘或抓取音频 CD — 分步引导。"
+                           Classes="PageSubtitle" TextWrapping="Wrap"/>
+            </StackPanel>
+
+            <!-- Step indicator -->
+            <Border Classes="InfoCard">
+                <StackPanel Orientation="Horizontal" Spacing="16" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <Border x:Name="StepInd1" Background="#1E90FF" CornerRadius="12"
+                                Width="24" Height="24" Padding="0">
+                            <TextBlock Text="1" Foreground="White" FontSize="12"
+                                       FontWeight="Bold" HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock x:Name="StepLbl1" Text="选择任务"
+                                   Foreground="#E8F0FE" FontSize="12"
+                                   VerticalAlignment="Center" FontWeight="SemiBold"/>
+                    </StackPanel>
+                    <TextBlock Text="→" Foreground="#5A7A9A" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <Border x:Name="StepInd2" Background="#1E3450" CornerRadius="12"
+                                Width="24" Height="24" Padding="0">
+                            <TextBlock Text="2" Foreground="#5A7A9A" FontSize="12"
+                                       FontWeight="Bold" HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock x:Name="StepLbl2" Text="配置"
+                                   Foreground="#5A7A9A" FontSize="12"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <TextBlock Text="→" Foreground="#5A7A9A" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <Border x:Name="StepInd3" Background="#1E3450" CornerRadius="12"
+                                Width="24" Height="24" Padding="0">
+                            <TextBlock Text="3" Foreground="#5A7A9A" FontSize="12"
+                                       FontWeight="Bold" HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock x:Name="StepLbl3" Text="摘要"
+                                   Foreground="#5A7A9A" FontSize="12"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <TextBlock Text="→" Foreground="#5A7A9A" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <Border x:Name="StepInd4" Background="#1E3450" CornerRadius="12"
+                                Width="24" Height="24" Padding="0">
+                            <TextBlock Text="4" Foreground="#5A7A9A" FontSize="12"
+                                       FontWeight="Bold" HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock x:Name="StepLbl4" Text="执行"
+                                   Foreground="#5A7A9A" FontSize="12"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- ============================================================ -->
+            <!-- STEP 1: Choose Task                                          -->
+            <!-- ============================================================ -->
+            <StackPanel x:Name="Step1Panel" Spacing="16">
+                <TextBlock Text="您想执行什么操作？" Classes="SectionHeader"/>
+
+                <WrapPanel Orientation="Horizontal">
+                    <!-- Create Audio CD -->
+                    <Button x:Name="BtnModeCreateAudioCd" Classes="NavBtn" Margin="0,0,12,12"
+                            Width="260" Height="130"
+                            HorizontalContentAlignment="Center"
+                            Click="OnModeCreateAudioCd"
+                            ToolTip.Tip="添加音轨、设置元数据并刻录红皮书音频 CD">
+                        <StackPanel HorizontalAlignment="Center" Spacing="8">
+                            <TextBlock Text="💿" FontSize="36" HorizontalAlignment="Center"/>
+                            <TextBlock Text="创建音频 CD" FontSize="15" FontWeight="SemiBold"
+                                       HorizontalAlignment="Center" Foreground="#E8F0FE"/>
+                            <TextBlock Text="从音频文件构建并刻录红皮书音频 CD"
+                                       FontSize="11" Foreground="#5A7A9A"
+                                       HorizontalAlignment="Center" TextWrapping="Wrap"
+                                       TextAlignment="Center" MaxWidth="220"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- Copy Music to Disc -->
+                    <Button x:Name="BtnModeCopyMusic" Classes="NavBtn" Margin="0,0,12,12"
+                            Width="260" Height="130"
+                            HorizontalContentAlignment="Center"
+                            Click="OnModeCopyMusic"
+                            ToolTip.Tip="将 MP3、WMA、FLAC、WAV 等音乐文件复制到数据光盘">
+                        <StackPanel HorizontalAlignment="Center" Spacing="8">
+                            <TextBlock Text="🎶" FontSize="36" HorizontalAlignment="Center"/>
+                            <TextBlock Text="将音乐复制到光盘" FontSize="15" FontWeight="SemiBold"
+                                       HorizontalAlignment="Center" Foreground="#E8F0FE"/>
+                            <TextBlock Text="将音乐文件作为数据刻录到 CD、DVD 或蓝光光盘"
+                                       FontSize="11" Foreground="#5A7A9A"
+                                       HorizontalAlignment="Center" TextWrapping="Wrap"
+                                       TextAlignment="Center" MaxWidth="220"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- Rip Audio CD -->
+                    <Button x:Name="BtnModeRipAudioCd" Classes="NavBtn" Margin="0,0,12,12"
+                            Width="260" Height="130"
+                            HorizontalContentAlignment="Center"
+                            Click="OnModeRipAudioCd"
+                            ToolTip.Tip="将音频 CD 中的音轨提取为 WAV 文件或原始 BIN/CUE 镜像">
+                        <StackPanel HorizontalAlignment="Center" Spacing="8">
+                            <TextBlock Text="🎧" FontSize="36" HorizontalAlignment="Center"/>
+                            <TextBlock Text="抓取音频 CD" FontSize="15" FontWeight="SemiBold"
+                                       HorizontalAlignment="Center" Foreground="#E8F0FE"/>
+                            <TextBlock Text="将音频 CD 中的音轨抓取为 WAV 或 BIN/CUE"
+                                       FontSize="11" Foreground="#5A7A9A"
+                                       HorizontalAlignment="Center" TextWrapping="Wrap"
+                                       TextAlignment="Center" MaxWidth="220"/>
+                        </StackPanel>
+                    </Button>
+                </WrapPanel>
+            </StackPanel>
+
+            <!-- ============================================================ -->
+            <!-- STEP 2A: Create Audio CD                                     -->
+            <!-- ============================================================ -->
+            <StackPanel x:Name="Step2CreatePanel" IsVisible="False" Spacing="16">
+                <TextBlock Text="创建音频 CD — 添加音轨并配置" Classes="SectionHeader"/>
+
+                <!-- Audio Tracks -->
+                <Border Classes="Card">
+                    <StackPanel Spacing="12">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBlock Text="🎵 音轨" Classes="SectionHeader"/>
+                            <TextBlock x:Name="TxtCreateTrackCount" Text="（0 条音轨，总时长 00:00）"
+                                       Foreground="#5A7A9A" FontSize="12" VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button x:Name="BtnAddTracks" Content="➕ 添加音轨"
+                                    Classes="PrimaryBtn" Click="OnAddTracksClick"
+                                    ToolTip.Tip="添加 WAV、MP3、WMA 或 AIFF 音频文件"/>
+                            <Button Content="📋 导入播放列表" Classes="ActionBtn"
+                                    Click="OnImportPlaylistCreateClick"
+                                    ToolTip.Tip="从播放列表文件导入音轨（M3U、M3U8、PLS、WPL、ASX）"/>
+                            <Button Content="💾 导出播放列表" Classes="ActionBtn"
+                                    Click="OnExportPlaylistCreateClick"
+                                    ToolTip.Tip="将当前音轨列表导出为播放列表文件"/>
+                            <Button Content="🗑 移除所选" Classes="DangerBtn"
+                                    Click="OnRemoveTrackClick"
+                                    ToolTip.Tip="从列表中移除选中的音轨"/>
+                            <Button Content="⬆" Classes="ActionBtn" Click="OnMoveTrackUpClick"
+                                    ToolTip.Tip="上移选中的音轨"/>
+                            <Button Content="⬇" Classes="ActionBtn" Click="OnMoveTrackDownClick"
+                                    ToolTip.Tip="下移选中的音轨"/>
+                        </StackPanel>
+
+                        <Border Classes="DropZone" DragDrop.AllowDrop="True"
+                                DragDrop.DragOver="OnTrackDragOver"
+                                DragDrop.Drop="OnTrackDrop">
+                            <ListBox x:Name="LstCreateTracks"
+                                     Background="Transparent"
+                                     MinHeight="100" MaxHeight="260">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+                                            <TextBlock Grid.Column="0" Text="{Binding TrackNumber}"
+                                                       Foreground="#5A7A9A" FontSize="12"
+                                                       VerticalAlignment="Center" Margin="0,0,8,0"
+                                                       FontWeight="Bold" Width="24"/>
+                                            <StackPanel Grid.Column="1" Spacing="1">
+                                                <TextBlock Text="{Binding Title}"
+                                                           Foreground="#E8F0FE" FontSize="12"
+                                                           TextTrimming="CharacterEllipsis"/>
+                                                <TextBlock Text="{Binding FilePath}"
+                                                           Foreground="#5A7A9A" FontSize="10"
+                                                           TextTrimming="CharacterEllipsis"/>
+                                            </StackPanel>
+                                            <TextBlock Grid.Column="2"
+                                                       Text="{Binding DurationText}"
+                                                       Foreground="#8EAFC8" FontSize="12"
+                                                       VerticalAlignment="Center" Margin="8,0"/>
+                                            <Button Grid.Column="3" Content="▶" FontSize="12"
+                                                    Classes="ActionBtn" Padding="6,4"
+                                                    Click="OnPreviewTrackClick"
+                                                    Tag="{Binding FilePath}"
+                                                    ToolTip.Tip="预览此音轨"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Border>
+
+                        <!-- Audio Player -->
+                        <Border Classes="InfoCard">
+                            <Grid ColumnDefinitions="Auto,Auto,Auto,*,Auto">
+                                <Button x:Name="BtnPlayPause" Content="▶ 播放"
+                                        Classes="ActionBtn" Grid.Column="0"
+                                        Click="OnPlayPauseClick"
+                                        ToolTip.Tip="播放或暂停选中的音轨"/>
+                                <Button Content="⏹ 停止" Classes="ActionBtn"
+                                        Grid.Column="1" Margin="6,0,0,0"
+                                        Click="OnStopClick"
+                                        ToolTip.Tip="停止播放"/>
+                                <TextBlock x:Name="TxtNowPlaying"
+                                           Text="未选择音轨"
+                                           Foreground="#5A7A9A" FontSize="11"
+                                           VerticalAlignment="Center"
+                                           Grid.Column="2" Margin="12,0,0,0"/>
+                                <Slider x:Name="SliderPosition"
+                                        Grid.Column="3" Minimum="0" Maximum="100"
+                                        Margin="12,0" VerticalAlignment="Center"
+                                        IsEnabled="False"
+                                        ToolTip.Tip="播放位置"/>
+                                <TextBlock x:Name="TxtPlaybackTime"
+                                           Text="00:00 / 00:00" Foreground="#8EAFC8"
+                                           FontSize="11" Grid.Column="4"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- CD-TEXT Metadata -->
+                <Expander Classes="SettingsExpander" Header="📝 CD-TEXT 文本元数据（可选）"
+                          IsExpanded="False">
+                    <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+                          Margin="0,12,0,0">
+                        <StackPanel Grid.Row="0" Grid.Column="0" Spacing="4" Margin="0,0,8,8">
+                            <TextBlock Text="专辑标题" Classes="FieldLabel"/>
+                            <TextBox x:Name="TxtCdAlbum" Watermark="专辑标题"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="0" Grid.Column="1" Spacing="4" Margin="0,0,0,8">
+                            <TextBlock Text="艺术家 / 表演者" Classes="FieldLabel"/>
+                            <TextBox x:Name="TxtCdArtist" Watermark="艺术家或表演者"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.Column="0" Spacing="4" Margin="0,0,8,8">
+                            <TextBlock Text="词作者" Classes="FieldLabel"/>
+                            <TextBox x:Name="TxtCdSongwriter" Watermark="词作者"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Grid.Column="1" Spacing="4" Margin="0,0,0,8">
+                            <TextBlock Text="作曲" Classes="FieldLabel"/>
+                            <TextBox x:Name="TxtCdComposer" Watermark="作曲"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Grid.Column="0" Spacing="4" Margin="0,0,8,8">
+                            <TextBlock Text="编曲" Classes="FieldLabel"/>
+                            <TextBox x:Name="TxtCdArranger" Watermark="编曲"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Grid.Column="1" Spacing="4" Margin="0,0,0,8">
+                            <TextBlock Text="流派" Classes="FieldLabel"/>
+                            <TextBox x:Name="TxtCdGenre" Watermark="流派"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="3" Grid.Column="0" Spacing="4" Margin="0,0,8,8">
+                            <TextBlock Text="光盘信息" Classes="FieldLabel"/>
+                            <TextBox x:Name="TxtCdMessage" Watermark="光盘信息"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="3" Grid.Column="1" Spacing="4" Margin="0,0,0,8">
+                            <TextBlock Text="介质目录编号（MCN）" Classes="FieldLabel"/>
+                            <TextBox x:Name="TxtCdMcn" Watermark="13 位条码（可选）"
+                                     MaxLength="13"/>
+                        </StackPanel>
+                    </Grid>
+                </Expander>
+
+                <!-- Burn Settings -->
+                <Border Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="🔥 刻录设置" Classes="SectionHeader"/>
+                        <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto">
+                            <StackPanel Grid.Row="0" Grid.Column="0" Spacing="4" Margin="0,0,8,8">
+                                <TextBlock Text="目标光驱" Classes="FieldLabel"/>
+                                <ComboBox x:Name="CmbCreateDrive" HorizontalAlignment="Stretch"
+                                          ToolTip.Tip="选择刻录机"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1" Spacing="4" Margin="0,0,8,8">
+                                <TextBlock Text="写入速度" Classes="FieldLabel"/>
+                                <ComboBox x:Name="CmbCreateSpeed" HorizontalAlignment="Stretch"
+                                          ToolTip.Tip="刻录的写入速度">
+                                    <ComboBoxItem Content="Auto" IsSelected="True"/>
+                                    <ComboBoxItem Content="1x"/>
+                                    <ComboBoxItem Content="2x"/>
+                                    <ComboBoxItem Content="4x"/>
+                                    <ComboBoxItem Content="8x"/>
+                                    <ComboBoxItem Content="10x"/>
+                                    <ComboBoxItem Content="12x"/>
+                                    <ComboBoxItem Content="16x"/>
+                                    <ComboBoxItem Content="24x"/>
+                                    <ComboBoxItem Content="32x"/>
+                                    <ComboBoxItem Content="40x"/>
+                                    <ComboBoxItem Content="48x"/>
+                                    <ComboBoxItem Content="52x"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="2" Spacing="4" Margin="0,0,0,8">
+                                <TextBlock Text="写入模式" Classes="FieldLabel"/>
+                                <ComboBox x:Name="CmbCreateWriteMode" HorizontalAlignment="Stretch"
+                                          ToolTip.Tip="音频 CD 的写入策略">
+                                    <ComboBoxItem Content="DAO (Disc At Once)" IsSelected="True"/>
+                                    <ComboBoxItem Content="SAO (Session At Once)"/>
+                                    <ComboBoxItem Content="TAO (Track At Once)"/>
+                                    <ComboBoxItem Content="RAW96R"/>
+                                    <ComboBoxItem Content="RAW96P"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="0" Spacing="4" Margin="0,0,8,0">
+                                <TextBlock Text="份数" Classes="FieldLabel"/>
+                                <NumericUpDown x:Name="NumCreateCopies" Minimum="1" Maximum="99"
+                                               Value="1" FormatString="0"
+                                               ToolTip.Tip="要刻录的光盘份数"/>
+                            </StackPanel>
+                        </Grid>
+                        <WrapPanel Orientation="Horizontal" Margin="0,4,0,0">
+                            <CheckBox x:Name="ChkCreateEject" Content="刻录后弹出"
+                                      IsChecked="True" Margin="0,0,16,6"
+                                      ToolTip.Tip="刻录完成时弹出光盘"/>
+                            <CheckBox x:Name="ChkCreateVerify" Content="刻录后校验"
+                                      Margin="0,0,16,6"
+                                      ToolTip.Tip="刻录后校验光盘完整性"/>
+                            <CheckBox x:Name="ChkCreateSimulate" Content="模拟（测试写入）"
+                                      Margin="0,0,16,6"
+                                      ToolTip.Tip="模拟刻录而不实际写入光盘"/>
+                            <CheckBox x:Name="ChkCreateBup" Content="缓存欠载保护"
+                                      IsChecked="True" Margin="0,0,16,6"
+                                      ToolTip.Tip="防止刻录过程中出现缓存欠载错误"/>
+                            <CheckBox x:Name="ChkCreateBurnImage"
+                                      Content="同时刻录到光盘（不仅构建镜像）"
+                                      IsChecked="True" Margin="0,0,16,6"
+                                      ToolTip.Tip="取消勾选则仅创建 BIN/CUE 镜像而不刻录"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Output Image Path -->
+                <Border Classes="Card">
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="💾 输出镜像" Classes="SectionHeader"/>
+                        <TextBlock Text="音频 CD 镜像（BIN/CUE）将保存到此位置。"
+                                   Foreground="#5A7A9A" FontSize="11"/>
+                        <Grid ColumnDefinitions="*,Auto" Margin="0,4,0,0">
+                            <TextBox x:Name="TxtCreateOutputPath"
+                                     Watermark="音频 CD 镜像的保存路径…"
+                                     Grid.Column="0"/>
+                            <Button Content="📂 浏览" Classes="ActionBtn"
+                                    Grid.Column="1" Margin="8,0,0,0"
+                                    Click="OnBrowseCreateOutputClick"
+                                    ToolTip.Tip="选择输出 BIN/CUE 镜像的保存位置"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!-- ============================================================ -->
+            <!-- STEP 2B: Copy Music to Disc                                  -->
+            <!-- ============================================================ -->
+            <StackPanel x:Name="Step2CopyPanel" IsVisible="False" Spacing="16">
+                <TextBlock Text="将音乐复制到光盘 — 选择文件" Classes="SectionHeader"/>
+
+                <!-- Music Files -->
+                <Border Classes="Card">
+                    <StackPanel Spacing="12">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBlock Text="🎶 音乐文件" Classes="SectionHeader"/>
+                            <TextBlock x:Name="TxtCopyFileCount" Text="（0 个文件，0 MB）"
+                                       Foreground="#5A7A9A" FontSize="12" VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button Content="➕ 添加文件" Classes="PrimaryBtn"
+                                    Click="OnAddCopyFilesClick"
+                                    ToolTip.Tip="添加要复制的音乐文件（MP3、FLAC、WAV、OGG、AIFF、AAC、WMA、M4A）"/>
+                            <Button Content="📁 添加文件夹" Classes="ActionBtn"
+                                    Click="OnAddCopyFolderClick"
+                                    ToolTip.Tip="添加文件夹中的所有音乐文件"/>
+                            <Button Content="📋 导入播放列表" Classes="ActionBtn"
+                                    Click="OnImportPlaylistCopyClick"
+                                    ToolTip.Tip="从播放列表文件导入文件（M3U、M3U8、PLS、WPL、ASX）"/>
+                            <Button Content="💾 导出播放列表" Classes="ActionBtn"
+                                    Click="OnExportPlaylistCopyClick"
+                                    ToolTip.Tip="将当前文件列表导出为播放列表文件"/>
+                            <Button Content="🗑 移除所选" Classes="DangerBtn"
+                                    Click="OnRemoveCopyFileClick"
+                                    ToolTip.Tip="从列表中移除选中的文件"/>
+                        </StackPanel>
+
+                        <Border Classes="DropZone" DragDrop.AllowDrop="True"
+                                DragDrop.DragOver="OnCopyDragOver"
+                                DragDrop.Drop="OnCopyDrop">
+                            <ListBox x:Name="LstCopyFiles"
+                                     Background="Transparent"
+                                     MinHeight="100" MaxHeight="260">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnDefinitions="*,Auto,Auto">
+                                            <StackPanel Spacing="1">
+                                                <TextBlock Text="{Binding FileName}"
+                                                           Foreground="#E8F0FE" FontSize="12"
+                                                           TextTrimming="CharacterEllipsis"/>
+                                                <TextBlock Text="{Binding FilePath}"
+                                                           Foreground="#5A7A9A" FontSize="10"
+                                                           TextTrimming="CharacterEllipsis"/>
+                                            </StackPanel>
+                                            <TextBlock Grid.Column="1"
+                                                       Text="{Binding SizeText}"
+                                                       Foreground="#8EAFC8" FontSize="12"
+                                                       VerticalAlignment="Center" Margin="8,0"/>
+                                            <Button Grid.Column="2" Content="▶" FontSize="12"
+                                                    Classes="ActionBtn" Padding="6,4"
+                                                    Click="OnPreviewCopyFileClick"
+                                                    Tag="{Binding FilePath}"
+                                                    ToolTip.Tip="预览此文件"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Border>
+
+                        <!-- Audio Player -->
+                        <Border Classes="InfoCard">
+                            <Grid ColumnDefinitions="Auto,Auto,Auto,*,Auto">
+                                <Button x:Name="BtnCopyPlayPause" Content="▶ 播放"
+                                        Classes="ActionBtn" Grid.Column="0"
+                                        Click="OnCopyPlayPauseClick"/>
+                                <Button Content="⏹ 停止" Classes="ActionBtn"
+                                        Grid.Column="1" Margin="6,0,0,0"
+                                        Click="OnCopyStopClick"/>
+                                <TextBlock x:Name="TxtCopyNowPlaying"
+                                           Text="未选择文件"
+                                           Foreground="#5A7A9A" FontSize="11"
+                                           VerticalAlignment="Center"
+                                           Grid.Column="2" Margin="12,0,0,0"/>
+                                <Slider x:Name="SliderCopyPosition"
+                                        Grid.Column="3" Minimum="0" Maximum="100"
+                                        Margin="12,0" VerticalAlignment="Center"
+                                        IsEnabled="False"/>
+                                <TextBlock x:Name="TxtCopyPlaybackTime"
+                                           Text="00:00 / 00:00" Foreground="#8EAFC8"
+                                           FontSize="11" Grid.Column="4"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- Disc Settings -->
+                <Border Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="💿 光盘设置" Classes="SectionHeader"/>
+                        <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,Auto">
+                            <StackPanel Grid.Row="0" Grid.Column="0" Spacing="4" Margin="0,0,8,8">
+                                <TextBlock Text="目标光驱" Classes="FieldLabel"/>
+                                <ComboBox x:Name="CmbCopyDrive" HorizontalAlignment="Stretch"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1" Spacing="4" Margin="0,0,8,8">
+                                <TextBlock Text="光盘类型" Classes="FieldLabel"/>
+                                <ComboBox x:Name="CmbCopyDiscType" HorizontalAlignment="Stretch"
+                                          ToolTip.Tip="数据光盘的光盘格式">
+                                    <ComboBoxItem Content="CD" IsSelected="True"/>
+                                    <ComboBoxItem Content="DVD-5"/>
+                                    <ComboBoxItem Content="DVD+R"/>
+                                    <ComboBoxItem Content="DVD-R"/>
+                                    <ComboBoxItem Content="BD-25"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="2" Spacing="4" Margin="0,0,0,8">
+                                <TextBlock Text="文件系统" Classes="FieldLabel"/>
+                                <ComboBox x:Name="CmbCopyFilesystem" HorizontalAlignment="Stretch"
+                                          ToolTip.Tip="数据光盘的文件系统">
+                                    <ComboBoxItem Content="ISO 9660 + Joliet" IsSelected="True"/>
+                                    <ComboBoxItem Content="ISO 9660"/>
+                                    <ComboBoxItem Content="UDF 1.02"/>
+                                    <ComboBoxItem Content="UDF 2.01"/>
+                                    <ComboBoxItem Content="ISO 9660 + UDF"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="0" Spacing="4" Margin="0,0,8,0">
+                                <TextBlock Text="写入速度" Classes="FieldLabel"/>
+                                <ComboBox x:Name="CmbCopySpeed" HorizontalAlignment="Stretch">
+                                    <ComboBoxItem Content="Auto" IsSelected="True"/>
+                                    <ComboBoxItem Content="1x"/>
+                                    <ComboBoxItem Content="2x"/>
+                                    <ComboBoxItem Content="4x"/>
+                                    <ComboBoxItem Content="8x"/>
+                                    <ComboBoxItem Content="16x"/>
+                                    <ComboBoxItem Content="24x"/>
+                                    <ComboBoxItem Content="32x"/>
+                                    <ComboBoxItem Content="48x"/>
+                                    <ComboBoxItem Content="52x"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="1" Spacing="4" Margin="0,0,8,0">
+                                <TextBlock Text="卷标" Classes="FieldLabel"/>
+                                <TextBox x:Name="TxtCopyVolumeLabel" Watermark="MUSIC_DISC"
+                                         MaxLength="32"/>
+                            </StackPanel>
+                        </Grid>
+                        <WrapPanel Orientation="Horizontal" Margin="0,4,0,0">
+                            <CheckBox x:Name="ChkCopyEject" Content="刻录后弹出"
+                                      IsChecked="True" Margin="0,0,16,6"/>
+                            <CheckBox x:Name="ChkCopyVerify" Content="刻录后校验"
+                                      Margin="0,0,16,6"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!-- ============================================================ -->
+            <!-- STEP 2C: Rip Audio CD                                        -->
+            <!-- ============================================================ -->
+            <StackPanel x:Name="Step2RipPanel" IsVisible="False" Spacing="16">
+                <TextBlock Text="抓取音频 CD — 配置抓取" Classes="SectionHeader"/>
+
+                <Border Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="💿 源光驱" Classes="SectionHeader"/>
+                        <Grid ColumnDefinitions="*,Auto">
+                            <ComboBox x:Name="CmbRipDrive" HorizontalAlignment="Stretch"
+                                      Grid.Column="0"
+                                      ToolTip.Tip="选择装有音频 CD 的光驱"/>
+                            <Button Content="🔄 刷新" Classes="ActionBtn"
+                                    Grid.Column="1" Margin="8,0,0,0"
+                                    Click="OnRefreshRipDrivesClick"
+                                    ToolTip.Tip="重新扫描光驱"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <Border Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="🎵 输出设置" Classes="SectionHeader"/>
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto">
+                            <StackPanel Grid.Row="0" Grid.Column="0" Spacing="4" Margin="0,0,8,8">
+                                <TextBlock Text="输出格式" Classes="FieldLabel"/>
+                                <ComboBox x:Name="CmbRipFormat" HorizontalAlignment="Stretch"
+                                          ToolTip.Tip="抓取音轨的音频格式">
+                                    <ComboBoxItem Content="WAV (Lossless, CD Quality)" IsSelected="True"/>
+                                    <ComboBoxItem Content="BIN/CUE (Raw Audio Image)"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1" Spacing="4" Margin="0,0,0,8">
+                                <TextBlock Text="读取速度" Classes="FieldLabel"/>
+                                <ComboBox x:Name="CmbRipSpeed" HorizontalAlignment="Stretch">
+                                    <ComboBoxItem Content="Max" IsSelected="True"/>
+                                    <ComboBoxItem Content="1x"/>
+                                    <ComboBoxItem Content="2x"/>
+                                    <ComboBoxItem Content="4x"/>
+                                    <ComboBoxItem Content="8x"/>
+                                    <ComboBoxItem Content="12x"/>
+                                    <ComboBoxItem Content="16x"/>
+                                    <ComboBoxItem Content="24x"/>
+                                    <ComboBoxItem Content="32x"/>
+                                    <ComboBoxItem Content="40x"/>
+                                    <ComboBoxItem Content="48x"/>
+                                    <ComboBoxItem Content="52x"/>
+                                </ComboBox>
+                            </StackPanel>
+                        </Grid>
+
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="输出文件夹" Classes="FieldLabel"/>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <TextBox x:Name="TxtRipOutputFolder"
+                                         Watermark="保存抓取音轨的文件夹…"
+                                         Grid.Column="0"/>
+                                <Button Content="📂 浏览" Classes="ActionBtn"
+                                        Grid.Column="1" Margin="8,0,0,0"
+                                        Click="OnBrowseRipOutputClick"/>
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <Expander Classes="SettingsExpander" Header="⚙️ 高级抓取选项"
+                          IsExpanded="False">
+                    <StackPanel Spacing="8" Margin="0,12,0,0">
+                        <WrapPanel Orientation="Horizontal">
+                            <CheckBox x:Name="ChkRipParanoia"
+                                      Content="音频精确抓取模式（抖动校正与重试）"
+                                      IsChecked="True" Margin="0,0,16,6"
+                                      ToolTip.Tip="使用音频精确级纠错以获得最高准确性"/>
+                            <CheckBox x:Name="ChkRipJitter"
+                                      Content="抖动校正"
+                                      IsChecked="True" Margin="0,0,16,6"
+                                      ToolTip.Tip="抓取过程中校正抖动错误"/>
+                        </WrapPanel>
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto">
+                            <StackPanel Grid.Column="0" Spacing="4" Margin="0,0,8,0">
+                                <TextBlock Text="错误恢复" Classes="FieldLabel"/>
+                                <ComboBox x:Name="CmbRipErrorRecovery" HorizontalAlignment="Stretch">
+                                    <ComboBoxItem Content="Yes (Skip &amp; Retry)" IsSelected="True"/>
+                                    <ComboBoxItem Content="No (Ignore Errors)"/>
+                                    <ComboBoxItem Content="Abort on Error"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Spacing="4" Margin="0,0,0,0">
+                                <TextBlock Text="重试次数" Classes="FieldLabel"/>
+                                <NumericUpDown x:Name="NumRipRetries" Minimum="0" Maximum="20"
+                                               Value="3" FormatString="0"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
+
+            <!-- ============================================================ -->
+            <!-- STEP 3: Summary                                              -->
+            <!-- ============================================================ -->
+            <StackPanel x:Name="Step3Panel" IsVisible="False" Spacing="16">
+                <TextBlock Text="摘要 — 执行前确认" Classes="SectionHeader"/>
+
+                <Border Classes="Card">
+                    <StackPanel x:Name="SummaryContent" Spacing="8">
+                        <!-- Filled dynamically -->
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!-- ============================================================ -->
+            <!-- STEP 4: Progress                                             -->
+            <!-- ============================================================ -->
+            <StackPanel x:Name="Step4Panel" IsVisible="False" Spacing="16">
+                <TextBlock x:Name="TxtStep4Title" Text="正在执行…" Classes="SectionHeader"/>
+
+                <Border Classes="Card">
+                    <StackPanel Spacing="12">
+                        <ProgressBar x:Name="PrgExec" Classes="BurnProgress" Value="0"/>
+                        <Grid ColumnDefinitions="*,Auto,Auto,Auto">
+                            <TextBlock x:Name="TxtExecStatus" Text="正在准备…"
+                                       Foreground="#8EAFC8" FontSize="12"
+                                       VerticalAlignment="Center"/>
+                            <TextBlock x:Name="TxtExecETA" Text=""
+                                       Foreground="#5A7A9A" FontSize="11"
+                                       Grid.Column="1" VerticalAlignment="Center"
+                                       Margin="12,0"/>
+                            <TextBlock x:Name="TxtExecSpeed" Text=""
+                                       Foreground="#5A7A9A" FontSize="11"
+                                       Grid.Column="2" VerticalAlignment="Center"
+                                       Margin="12,0"/>
+                            <TextBlock x:Name="TxtExecPercent" Text="0%"
+                                       Foreground="#E8F0FE" FontSize="13"
+                                       FontWeight="SemiBold"
+                                       Grid.Column="3" VerticalAlignment="Center"/>
+                        </Grid>
+                        <TextBox x:Name="TxtExecLog" Classes="LogBox" Height="200"/>
+                        <!-- Disc Visualization -->
+                        <Border x:Name="DiscVizBorder" Background="#0A1520" CornerRadius="8"
+                                Padding="8" IsVisible="False" Margin="0,8,0,0">
+                            <views:DiscVisualizationControl x:Name="DiscViz" Height="200"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!-- ============================================================ -->
+            <!-- Navigation Buttons                                           -->
+            <!-- ============================================================ -->
+            <Border Classes="InfoCard" Margin="0,8,0,0">
+                <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+                    <Button x:Name="BtnBack" Content="← 上一步"
+                            Classes="ActionBtn" Click="OnBackClick"
+                            IsVisible="False"
+                            ToolTip.Tip="返回上一步"/>
+                    <Button x:Name="BtnNext" Content="下一步 →"
+                            Classes="PrimaryBtn" Grid.Column="2"
+                            Click="OnNextClick" IsVisible="False"
+                            ToolTip.Tip="进入下一步"/>
+                    <Button x:Name="BtnExecute" Content="🔥 开始"
+                            Classes="PrimaryBtn" Grid.Column="2"
+                            Click="OnExecuteClick" IsVisible="False"
+                            ToolTip.Tip="开始操作"/>
+                    <Button x:Name="BtnCancel" Content="⏹ 取消"
+                            Classes="DangerBtn" Grid.Column="3"
+                            Margin="8,0,0,0" Click="OnCancelClick"
+                            IsVisible="False"
+                            ToolTip.Tip="取消当前操作"/>
+                    <Button x:Name="BtnFinish" Content="✅ 完成 — 返回主页"
+                            Classes="PrimaryBtn" Grid.Column="2"
+                            Click="OnFinishClick" IsVisible="False"
+                            ToolTip.Tip="操作完成 — 返回主界面"/>
+                </Grid>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+
+</UserControl>

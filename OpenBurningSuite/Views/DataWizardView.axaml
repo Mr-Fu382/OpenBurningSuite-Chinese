@@ -1,0 +1,748 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:views="clr-namespace:OpenBurningSuite.Views"
+             x:Class="OpenBurningSuite.Views.DataWizardView">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="28,24" Spacing="20">
+
+            <!-- Page header -->
+            <StackPanel Spacing="4">
+                <TextBlock Text="📁  数据光盘向导"
+                           Classes="PageTitle" Foreground="#5BC0FF"/>
+                <TextBlock Text="从文件和文件夹创建并刻录数据光盘 — 分步引导。"
+                           Classes="PageSubtitle" TextWrapping="Wrap"/>
+            </StackPanel>
+
+            <!-- Step indicator -->
+            <Border Classes="InfoCard">
+                <StackPanel Orientation="Horizontal" Spacing="16" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <Border x:Name="DStepInd1" Background="#1E90FF" CornerRadius="12"
+                                Width="24" Height="24" Padding="0">
+                            <TextBlock Text="1" Foreground="White" FontSize="12"
+                                       FontWeight="Bold" HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock x:Name="DStepLbl1" Text="选择任务"
+                                   Foreground="#E8F0FE" FontSize="12"
+                                   VerticalAlignment="Center" FontWeight="SemiBold"/>
+                    </StackPanel>
+                    <TextBlock Text="→" Foreground="#5A7A9A" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <Border x:Name="DStepInd2" Background="#1E3450" CornerRadius="12"
+                                Width="24" Height="24" Padding="0">
+                            <TextBlock Text="2" Foreground="#5A7A9A" FontSize="12"
+                                       FontWeight="Bold" HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock x:Name="DStepLbl2" Text="配置"
+                                   Foreground="#5A7A9A" FontSize="12"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <TextBlock Text="→" Foreground="#5A7A9A" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <Border x:Name="DStepInd3" Background="#1E3450" CornerRadius="12"
+                                Width="24" Height="24" Padding="0">
+                            <TextBlock Text="3" Foreground="#5A7A9A" FontSize="12"
+                                       FontWeight="Bold" HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock x:Name="DStepLbl3" Text="摘要"
+                                   Foreground="#5A7A9A" FontSize="12"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <TextBlock Text="→" Foreground="#5A7A9A" VerticalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <Border x:Name="DStepInd4" Background="#1E3450" CornerRadius="12"
+                                Width="24" Height="24" Padding="0">
+                            <TextBlock Text="4" Foreground="#5A7A9A" FontSize="12"
+                                       FontWeight="Bold" HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock x:Name="DStepLbl4" Text="执行"
+                                   Foreground="#5A7A9A" FontSize="12"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- ============================================================ -->
+            <!-- STEP 1: Choose Task                                          -->
+            <!-- ============================================================ -->
+            <StackPanel x:Name="Step1Panel" Spacing="16">
+                <TextBlock Text="您想执行什么操作？" Classes="SectionHeader"/>
+
+                <WrapPanel Orientation="Horizontal">
+                    <!-- Build Image from Files -->
+                    <Button x:Name="BtnModeBuildImage" Classes="NavBtn" Margin="0,0,12,12"
+                            Width="260" Height="130"
+                            HorizontalContentAlignment="Center"
+                            Click="OnModeBuildImage"
+                            ToolTip.Tip="选择文件和文件夹以创建可稍后刻录的光盘镜像（ISO）">
+                        <StackPanel HorizontalAlignment="Center" Spacing="8">
+                            <TextBlock Text="🏗" FontSize="36" HorizontalAlignment="Center"/>
+                            <TextBlock Text="构建数据镜像" FontSize="15" FontWeight="SemiBold"
+                                       HorizontalAlignment="Center" Foreground="#E8F0FE"/>
+                            <TextBlock Text="从文件和文件夹创建光盘镜像"
+                                       FontSize="11" Foreground="#5A7A9A"
+                                       HorizontalAlignment="Center" TextWrapping="Wrap"
+                                       TextAlignment="Center" MaxWidth="220"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- Build and Burn -->
+                    <Button x:Name="BtnModeBuildAndBurn" Classes="NavBtn" Margin="0,0,12,12"
+                            Width="260" Height="130"
+                            HorizontalContentAlignment="Center"
+                            Click="OnModeBuildAndBurn"
+                            ToolTip.Tip="选择文件和文件夹，构建光盘镜像并直接刻录到光盘">
+                        <StackPanel HorizontalAlignment="Center" Spacing="8">
+                            <TextBlock Text="🔥" FontSize="36" HorizontalAlignment="Center"/>
+                            <TextBlock Text="构建并刻录到光盘" FontSize="15" FontWeight="SemiBold"
+                                       HorizontalAlignment="Center" Foreground="#E8F0FE"/>
+                            <TextBlock Text="从文件构建镜像并刻录到光盘"
+                                       FontSize="11" Foreground="#5A7A9A"
+                                       HorizontalAlignment="Center" TextWrapping="Wrap"
+                                       TextAlignment="Center" MaxWidth="220"/>
+                        </StackPanel>
+                    </Button>
+
+                    <!-- Burn Existing Image -->
+                    <Button x:Name="BtnModeBurnImage" Classes="NavBtn" Margin="0,0,12,12"
+                            Width="260" Height="130"
+                            HorizontalContentAlignment="Center"
+                            Click="OnModeBurnImage"
+                            ToolTip.Tip="选择已有的光盘镜像文件并刻录到光盘">
+                        <StackPanel HorizontalAlignment="Center" Spacing="8">
+                            <TextBlock Text="💿" FontSize="36" HorizontalAlignment="Center"/>
+                            <TextBlock Text="刻录已有镜像" FontSize="15" FontWeight="SemiBold"
+                                       HorizontalAlignment="Center" Foreground="#E8F0FE"/>
+                            <TextBlock Text="将已有的 ISO 或光盘镜像刻录到光盘"
+                                       FontSize="11" Foreground="#5A7A9A"
+                                       HorizontalAlignment="Center" TextWrapping="Wrap"
+                                       TextAlignment="Center" MaxWidth="220"/>
+                        </StackPanel>
+                    </Button>
+                </WrapPanel>
+            </StackPanel>
+
+            <!-- ============================================================ -->
+            <!-- STEP 2A: Build Data Image                                    -->
+            <!-- ============================================================ -->
+            <StackPanel x:Name="Step2BuildPanel" IsVisible="False" Spacing="16">
+                <TextBlock Text="构建数据镜像 — 添加文件并配置" Classes="SectionHeader"/>
+
+                <!-- Source Files -->
+                <Border Classes="Card">
+                    <StackPanel Spacing="12">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBlock Text="📁 源文件与文件夹" Classes="SectionHeader"/>
+                            <TextBlock x:Name="TxtBuildFileCount" Text="（0 项，0 B）"
+                                       Foreground="#5A7A9A" FontSize="12" VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button Content="📄 添加文件" Classes="PrimaryBtn"
+                                    Click="OnAddBuildFilesClick"
+                                    ToolTip.Tip="向光盘添加单个文件"/>
+                            <Button Content="📁 添加文件夹" Classes="ActionBtn"
+                                    Click="OnAddBuildFolderClick"
+                                    ToolTip.Tip="添加整个文件夹及其内容"/>
+                            <Button Content="🗑 移除所选" Classes="DangerBtn"
+                                    Click="OnRemoveBuildItemClick"
+                                    ToolTip.Tip="从列表中移除选中项"/>
+                            <Button Content="🗑 全部清除" Classes="DangerBtn"
+                                    Click="OnClearBuildItemsClick"
+                                    ToolTip.Tip="从列表中移除所有项"/>
+                        </StackPanel>
+
+                        <Border Classes="DropZone" DragDrop.AllowDrop="True"
+                                DragDrop.DragOver="OnBuildDragOver"
+                                DragDrop.Drop="OnBuildDrop">
+                            <ListBox x:Name="LstBuildFiles"
+                                     Background="Transparent"
+                                     MinHeight="100" MaxHeight="260">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnDefinitions="Auto,*,Auto">
+                                            <TextBlock Grid.Column="0" Text="{Binding Icon}"
+                                                       FontSize="16" VerticalAlignment="Center"
+                                                       Margin="0,0,8,0"/>
+                                            <StackPanel Grid.Column="1" Spacing="1">
+                                                <TextBlock Text="{Binding Name}"
+                                                           Foreground="#E8F0FE" FontSize="12"
+                                                           TextTrimming="CharacterEllipsis"/>
+                                                <TextBlock Text="{Binding FullPath}"
+                                                           Foreground="#5A7A9A" FontSize="10"
+                                                           TextTrimming="CharacterEllipsis"/>
+                                            </StackPanel>
+                                            <TextBlock Grid.Column="2"
+                                                       Text="{Binding SizeText}"
+                                                       Foreground="#8EAFC8" FontSize="12"
+                                                       VerticalAlignment="Center" Margin="8,0"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Border>
+
+                        <TextBlock Text="💡 将文件或文件夹拖放到此处"
+                                   Foreground="#5A7A9A" FontSize="10"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Disc Settings -->
+                <Border Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="⚙️ 光盘设置" Classes="SectionHeader"/>
+
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto">
+                            <StackPanel Grid.Row="0" Grid.Column="0" Spacing="4" Margin="0,0,8,8">
+                                <TextBlock Text="光盘类型" Classes="FieldLabel"/>
+                                <ComboBox x:Name="CmbBuildDiscType" HorizontalAlignment="Stretch"
+                                          ToolTip.Tip="目标光盘类型（CD、DVD、蓝光等）">
+                                    <ComboBoxItem Content="CD" IsSelected="True"/>
+                                    <ComboBoxItem Content="DVD-5"/>
+                                    <ComboBoxItem Content="DVD-9"/>
+                                    <ComboBoxItem Content="DVD-R"/>
+                                    <ComboBoxItem Content="DVD+R"/>
+                                    <ComboBoxItem Content="DVD-RW"/>
+                                    <ComboBoxItem Content="DVD+RW"/>
+                                    <ComboBoxItem Content="DVD+R DL"/>
+                                    <ComboBoxItem Content="DVD-R DL"/>
+                                    <ComboBoxItem Content="DVD+RW DL"/>
+                                    <ComboBoxItem Content="DVD-RAM"/>
+                                    <ComboBoxItem Content="HD DVD-15"/>
+                                    <ComboBoxItem Content="HD DVD-30"/>
+                                    <ComboBoxItem Content="HD DVD-RAM"/>
+                                    <ComboBoxItem Content="HD DVD-RW"/>
+                                    <ComboBoxItem Content="BD-25"/>
+                                    <ComboBoxItem Content="BD-50"/>
+                                    <ComboBoxItem Content="BD-100"/>
+                                    <ComboBoxItem Content="BD-128"/>
+                                    <ComboBoxItem Content="M-DISC DVD"/>
+                                    <ComboBoxItem Content="M-DISC BD-25"/>
+                                    <ComboBoxItem Content="M-DISC BD-50"/>
+                                    <ComboBoxItem Content="M-DISC BD-100"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1" Spacing="4" Margin="0,0,0,8">
+                                <TextBlock Text="文件系统" Classes="FieldLabel"/>
+                                <ComboBox x:Name="CmbBuildFileSystem" HorizontalAlignment="Stretch"
+                                          ToolTip.Tip="光盘镜像使用的文件系统格式">
+                                    <ComboBoxItem Content="ISO 9660"/>
+                                    <ComboBoxItem Content="ISO 9660 + Joliet" IsSelected="True"/>
+                                    <ComboBoxItem Content="ISO 9660 + UDF"/>
+                                    <ComboBoxItem Content="UDF 1.02"/>
+                                    <ComboBoxItem Content="UDF 1.50"/>
+                                    <ComboBoxItem Content="UDF 2.01"/>
+                                    <ComboBoxItem Content="UDF 2.50"/>
+                                    <ComboBoxItem Content="UDF 2.60"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="0" Spacing="4" Margin="0,0,8,8">
+                                <TextBlock Text="卷标" Classes="FieldLabel"/>
+                                <TextBox x:Name="TxtBuildVolumeLabel" Watermark="DATA_DISC"
+                                         Background="#152030" Foreground="#E8F0FE"
+                                         ToolTip.Tip="挂载光盘时显示的卷标（最多 32 个字符）"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="1" Spacing="4" Margin="0,0,0,8">
+                                <TextBlock Text="总大小 / 容量" Classes="FieldLabel"/>
+                                <TextBlock x:Name="TxtBuildCapacityInfo" Text="0 B / 700 MB（CD）"
+                                           Foreground="#1E90FF" FontSize="13" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- Output Path -->
+                <Border Classes="Card">
+                    <StackPanel Spacing="8">
+                        <TextBlock Text="💾 输出镜像路径" Classes="SectionHeader"/>
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBox x:Name="TxtBuildOutputPath"
+                                     Watermark="输出 ISO 镜像路径…"
+                                     Background="#152030" Foreground="#E8F0FE"
+                                     ToolTip.Tip="光盘镜像文件的保存路径"/>
+                            <Button Content="浏览…" Classes="ActionBtn" Grid.Column="1"
+                                    Margin="6,0,0,0" Click="OnBrowseBuildOutputClick"
+                                    ToolTip.Tip="选择输出文件位置"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- Advanced Options -->
+                <Expander Classes="SettingsExpander" Header="⚙️ 高级选项（可选）"
+                          IsExpanded="False">
+                    <StackPanel Spacing="8" Margin="0,12,0,0">
+                        <WrapPanel Orientation="Horizontal">
+                            <CheckBox x:Name="ChkBuildJolietLong"
+                                      Content="Joliet 长文件名（最多 110 个字符）"
+                                      IsChecked="True" Margin="0,0,16,6"
+                                      ToolTip.Tip="允许 Joliet 扩展中超过 64 个字符的文件名"/>
+                            <CheckBox x:Name="ChkBuildRockRidge"
+                                      Content="Rock Ridge 扩展（POSIX 元数据）"
+                                      Margin="0,0,16,6"
+                                      ToolTip.Tip="包含文件权限和符号链接等 POSIX 元数据（对 Linux/macOS 很重要）"/>
+                            <CheckBox x:Name="ChkBuildDeepDir"
+                                      Content="允许深层目录嵌套（&gt;8 层）"
+                                      Margin="0,0,16,6"
+                                      ToolTip.Tip="允许目录嵌套超过 ISO 9660 的 8 层限制"/>
+                            <CheckBox x:Name="ChkBuildLowercase"
+                                      Content="允许小写文件名"
+                                      Margin="0,0,16,6"
+                                      ToolTip.Tip="允许 ISO 9660 文件名使用小写字母"/>
+                            <CheckBox x:Name="ChkBuildSpecialChars"
+                                      Content="允许特殊字符"
+                                      Margin="0,0,16,6"
+                                      ToolTip.Tip="允许文件名使用特殊字符"/>
+                            <CheckBox x:Name="ChkBuildSortFiles"
+                                      Content="按字母顺序排列文件"
+                                      Margin="0,0,16,6"
+                                      ToolTip.Tip="在镜像中按字母顺序排列文件"/>
+                            <CheckBox x:Name="ChkBuildPad"
+                                      Content="填充镜像至光盘容量"
+                                      Margin="0,0,16,6"
+                                      ToolTip.Tip="用零填充镜像以占满光盘容量"/>
+                        </WrapPanel>
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto">
+                            <StackPanel Grid.Row="0" Grid.Column="0" Spacing="4" Margin="0,0,8,8">
+                                <TextBlock Text="出版者" Classes="FieldLabel"/>
+                                <TextBox x:Name="TxtBuildPublisher" Watermark="出版者名称"
+                                         Background="#152030" Foreground="#E8F0FE"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1" Spacing="4" Margin="0,0,0,8">
+                                <TextBlock Text="制作者" Classes="FieldLabel"/>
+                                <TextBox x:Name="TxtBuildPreparer" Watermark="数据制作者"
+                                         Background="#152030" Foreground="#E8F0FE"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="0" Spacing="4" Margin="0,0,8,0">
+                                <TextBlock Text="应用程序" Classes="FieldLabel"/>
+                                <TextBox x:Name="TxtBuildApplication" Watermark="应用程序标识"
+                                         Background="#152030" Foreground="#E8F0FE"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Expander>
+
+                <!-- Bootable Disc Options -->
+                <Expander Classes="SettingsExpander" Header="🖥 可启动光盘（El Torito 引导，可选）"
+                          IsExpanded="False">
+                    <StackPanel Spacing="8" Margin="0,12,0,0">
+                        <CheckBox x:Name="ChkBuildBootable"
+                                  Content="创建可启动光盘（El Torito 引导）"
+                                  Margin="0,0,16,6"
+                                  ToolTip.Tip="按照 El Torito 引导规范添加启动记录"/>
+                        <Grid ColumnDefinitions="*,Auto" Margin="0,4,0,0">
+                            <TextBox x:Name="TxtBuildBootImage"
+                                     Watermark="BIOS 启动镜像路径…"
+                                     Background="#152030" Foreground="#E8F0FE"
+                                     ToolTip.Tip="BIOS 启动镜像文件路径（例如 isolinux.bin）"/>
+                            <Button Content="浏览…" Classes="ActionBtn" Grid.Column="1"
+                                    Margin="6,0,0,0" Click="OnBrowseBootImageClick"
+                                    ToolTip.Tip="浏览并选择启动镜像"/>
+                        </Grid>
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto">
+                            <StackPanel Grid.Row="0" Grid.Column="0" Spacing="4" Margin="0,0,8,8">
+                                <TextBlock Text="启动模拟" Classes="FieldLabel"/>
+                                <ComboBox x:Name="CmbBuildBootEmulation" HorizontalAlignment="Stretch"
+                                          ToolTip.Tip="El Torito 引导模拟模式">
+                                    <ComboBoxItem Content="No Emulation" IsSelected="True"/>
+                                    <ComboBoxItem Content="1.2 MB Floppy"/>
+                                    <ComboBoxItem Content="1.44 MB Floppy"/>
+                                    <ComboBoxItem Content="2.88 MB Floppy"/>
+                                    <ComboBoxItem Content="Hard Disk"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1" Spacing="4" Margin="0,0,0,8">
+                                <TextBlock Text="启动平台" Classes="FieldLabel"/>
+                                <ComboBox x:Name="CmbBuildBootPlatform" HorizontalAlignment="Stretch"
+                                          ToolTip.Tip="El Torito 引导平台标识">
+                                    <ComboBoxItem Content="x86 (BIOS)" IsSelected="True"/>
+                                    <ComboBoxItem Content="EFI"/>
+                                    <ComboBoxItem Content="PowerPC"/>
+                                    <ComboBoxItem Content="Mac"/>
+                                </ComboBox>
+                            </StackPanel>
+                        </Grid>
+                        <CheckBox x:Name="ChkBuildBootInfoTable"
+                                  Content="修补启动信息表（用于 ISOLINUX/GRUB）"
+                                  Margin="0,0,16,6"
+                                  ToolTip.Tip="注入 ISOLINUX/GRUB 引导程序使用的 El Torito 启动信息表"/>
+                        <Grid ColumnDefinitions="*,Auto" Margin="0,4,0,0">
+                            <TextBox x:Name="TxtBuildEfiBootImage"
+                                     Watermark="EFI 启动镜像路径（可选，用于双启动）…"
+                                     Background="#152030" Foreground="#E8F0FE"
+                                     ToolTip.Tip="用于 BIOS+EFI 双启动光盘的可选 EFI 启动镜像"/>
+                            <Button Content="浏览…" Classes="ActionBtn" Grid.Column="1"
+                                    Margin="6,0,0,0" Click="OnBrowseEfiBootImageClick"
+                                    ToolTip.Tip="浏览并选择 EFI 启动镜像"/>
+                        </Grid>
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
+
+            <!-- ============================================================ -->
+            <!-- STEP 2B: Build and Burn to Disc                              -->
+            <!-- ============================================================ -->
+            <StackPanel x:Name="Step2BuildBurnPanel" IsVisible="False" Spacing="16">
+                <TextBlock Text="构建并刻录 — 添加文件、配置并刻录" Classes="SectionHeader"/>
+
+                <!-- Source Files (same layout as 2A) -->
+                <Border Classes="Card">
+                    <StackPanel Spacing="12">
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <TextBlock Text="📁 源文件与文件夹" Classes="SectionHeader"/>
+                            <TextBlock x:Name="TxtBBFileCount" Text="（0 项，0 B）"
+                                       Foreground="#5A7A9A" FontSize="12" VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button Content="📄 添加文件" Classes="PrimaryBtn"
+                                    Click="OnAddBBFilesClick"
+                                    ToolTip.Tip="向光盘添加单个文件"/>
+                            <Button Content="📁 添加文件夹" Classes="ActionBtn"
+                                    Click="OnAddBBFolderClick"
+                                    ToolTip.Tip="添加整个文件夹及其内容"/>
+                            <Button Content="🗑 移除所选" Classes="DangerBtn"
+                                    Click="OnRemoveBBItemClick"
+                                    ToolTip.Tip="移除选中项"/>
+                            <Button Content="🗑 全部清除" Classes="DangerBtn"
+                                    Click="OnClearBBItemsClick"
+                                    ToolTip.Tip="移除所有项"/>
+                        </StackPanel>
+
+                        <Border Classes="DropZone" DragDrop.AllowDrop="True"
+                                DragDrop.DragOver="OnBBDragOver"
+                                DragDrop.Drop="OnBBDrop">
+                            <ListBox x:Name="LstBBFiles"
+                                     Background="Transparent"
+                                     MinHeight="100" MaxHeight="260">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnDefinitions="Auto,*,Auto">
+                                            <TextBlock Grid.Column="0" Text="{Binding Icon}"
+                                                       FontSize="16" VerticalAlignment="Center"
+                                                       Margin="0,0,8,0"/>
+                                            <StackPanel Grid.Column="1" Spacing="1">
+                                                <TextBlock Text="{Binding Name}"
+                                                           Foreground="#E8F0FE" FontSize="12"
+                                                           TextTrimming="CharacterEllipsis"/>
+                                                <TextBlock Text="{Binding FullPath}"
+                                                           Foreground="#5A7A9A" FontSize="10"
+                                                           TextTrimming="CharacterEllipsis"/>
+                                            </StackPanel>
+                                            <TextBlock Grid.Column="2"
+                                                       Text="{Binding SizeText}"
+                                                       Foreground="#8EAFC8" FontSize="12"
+                                                       VerticalAlignment="Center" Margin="8,0"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </Border>
+
+                        <TextBlock Text="💡 将文件或文件夹拖放到此处"
+                                   Foreground="#5A7A9A" FontSize="10"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Disc &amp; Burn Settings -->
+                <Border Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="⚙️ 光盘与刻录设置" Classes="SectionHeader"/>
+
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto,Auto">
+                            <StackPanel Grid.Row="0" Grid.Column="0" Spacing="4" Margin="0,0,8,8">
+                                <TextBlock Text="光盘类型" Classes="FieldLabel"/>
+                                <ComboBox x:Name="CmbBBDiscType" HorizontalAlignment="Stretch"
+                                          ToolTip.Tip="目标光盘类型">
+                                    <ComboBoxItem Content="CD" IsSelected="True"/>
+                                    <ComboBoxItem Content="DVD-5"/>
+                                    <ComboBoxItem Content="DVD-9"/>
+                                    <ComboBoxItem Content="DVD-R"/>
+                                    <ComboBoxItem Content="DVD+R"/>
+                                    <ComboBoxItem Content="DVD-RW"/>
+                                    <ComboBoxItem Content="DVD+RW"/>
+                                    <ComboBoxItem Content="DVD+R DL"/>
+                                    <ComboBoxItem Content="DVD-R DL"/>
+                                    <ComboBoxItem Content="DVD+RW DL"/>
+                                    <ComboBoxItem Content="DVD-RAM"/>
+                                    <ComboBoxItem Content="HD DVD-15"/>
+                                    <ComboBoxItem Content="HD DVD-30"/>
+                                    <ComboBoxItem Content="HD DVD-RAM"/>
+                                    <ComboBoxItem Content="HD DVD-RW"/>
+                                    <ComboBoxItem Content="BD-25"/>
+                                    <ComboBoxItem Content="BD-50"/>
+                                    <ComboBoxItem Content="BD-100"/>
+                                    <ComboBoxItem Content="BD-128"/>
+                                    <ComboBoxItem Content="M-DISC DVD"/>
+                                    <ComboBoxItem Content="M-DISC BD-25"/>
+                                    <ComboBoxItem Content="M-DISC BD-50"/>
+                                    <ComboBoxItem Content="M-DISC BD-100"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1" Spacing="4" Margin="0,0,0,8">
+                                <TextBlock Text="文件系统" Classes="FieldLabel"/>
+                                <ComboBox x:Name="CmbBBFileSystem" HorizontalAlignment="Stretch"
+                                          ToolTip.Tip="文件系统格式">
+                                    <ComboBoxItem Content="ISO 9660"/>
+                                    <ComboBoxItem Content="ISO 9660 + Joliet" IsSelected="True"/>
+                                    <ComboBoxItem Content="ISO 9660 + UDF"/>
+                                    <ComboBoxItem Content="UDF 1.02"/>
+                                    <ComboBoxItem Content="UDF 2.01"/>
+                                    <ComboBoxItem Content="UDF 2.50"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="0" Spacing="4" Margin="0,0,8,8">
+                                <TextBlock Text="卷标" Classes="FieldLabel"/>
+                                <TextBox x:Name="TxtBBVolumeLabel" Watermark="DATA_DISC"
+                                         Background="#152030" Foreground="#E8F0FE"
+                                         ToolTip.Tip="挂载光盘时显示的卷标"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="1" Spacing="4" Margin="0,0,0,8">
+                                <TextBlock Text="总大小 / 容量" Classes="FieldLabel"/>
+                                <TextBlock x:Name="TxtBBCapacityInfo" Text="0 B / 700 MB（CD）"
+                                           Foreground="#1E90FF" FontSize="13" VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Grid.Column="0" Spacing="4" Margin="0,0,8,8">
+                                <TextBlock Text="目标光驱" Classes="FieldLabel"/>
+                                <ComboBox x:Name="CmbBBDrive" HorizontalAlignment="Stretch"
+                                          ToolTip.Tip="要刻录到的光盘驱动器"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Grid.Column="1" Spacing="4" Margin="0,0,0,8">
+                                <TextBlock Text="写入速度" Classes="FieldLabel"/>
+                                <ComboBox x:Name="CmbBBSpeed" HorizontalAlignment="Stretch"
+                                          ToolTip.Tip="刻录的写入速度">
+                                    <ComboBoxItem Content="Auto" IsSelected="True"/>
+                                    <ComboBoxItem Content="1x"/>
+                                    <ComboBoxItem Content="2x"/>
+                                    <ComboBoxItem Content="4x"/>
+                                    <ComboBoxItem Content="8x"/>
+                                    <ComboBoxItem Content="16x"/>
+                                    <ComboBoxItem Content="24x"/>
+                                    <ComboBoxItem Content="48x"/>
+                                    <ComboBoxItem Content="Max"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Row="3" Grid.Column="0" Spacing="4" Margin="0,0,8,0">
+                                <TextBlock Text="份数" Classes="FieldLabel"/>
+                                <NumericUpDown x:Name="NumBBCopies" Minimum="1" Maximum="100"
+                                               Value="1" FormatString="0"
+                                               ToolTip.Tip="要刻录的份数"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <WrapPanel Orientation="Horizontal" Margin="0,4,0,0">
+                            <CheckBox x:Name="ChkBBEject"
+                                      Content="刻录后弹出" IsChecked="True"
+                                      Margin="0,0,16,6"
+                                      ToolTip.Tip="刻录完成后弹出光盘托盘"/>
+                            <CheckBox x:Name="ChkBBVerify"
+                                      Content="刻录后校验"
+                                      Margin="0,0,16,6"
+                                      ToolTip.Tip="刻录后校验光盘"/>
+                            <CheckBox x:Name="ChkBBSimulate"
+                                      Content="仅模拟（不写入）"
+                                      Margin="0,0,16,6"
+                                      ToolTip.Tip="执行模拟刻录而不写入数据"/>
+                            <CheckBox x:Name="ChkBBBup"
+                                      Content="缓存欠载保护" IsChecked="True"
+                                      Margin="0,0,16,6"
+                                      ToolTip.Tip="启用缓存欠载保护以防止出错"/>
+                        </WrapPanel>
+
+                        <Button Content="🔄 刷新光驱" Classes="ActionBtn"
+                                Click="OnRefreshDrivesClick" Margin="0,4,0,0"
+                                ToolTip.Tip="重新扫描光盘驱动器"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!-- ============================================================ -->
+            <!-- STEP 2C: Burn Existing Image                                 -->
+            <!-- ============================================================ -->
+            <StackPanel x:Name="Step2BurnPanel" IsVisible="False" Spacing="16">
+                <TextBlock Text="刻录已有镜像 — 选择镜像与光驱" Classes="SectionHeader"/>
+
+                <!-- Image Selection -->
+                <Border Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="💿 光盘镜像文件" Classes="SectionHeader"/>
+
+                        <Grid ColumnDefinitions="*,Auto">
+                            <TextBox x:Name="TxtBurnImagePath"
+                                     Watermark="光盘镜像路径（.iso、.bin、.nrg、.mdf、.cdi、.img）…"
+                                     Background="#152030" Foreground="#E8F0FE"
+                                     ToolTip.Tip="要刻录的光盘镜像文件路径"
+                                     DragDrop.AllowDrop="True"
+                                     DragDrop.DragOver="OnBurnImageDragOver"
+                                     DragDrop.Drop="OnBurnImageDrop"/>
+                            <Button Content="浏览…" Classes="ActionBtn" Grid.Column="1"
+                                    Margin="6,0,0,0" Click="OnBrowseBurnImageClick"
+                                    ToolTip.Tip="浏览并选择光盘镜像文件"/>
+                        </Grid>
+
+                        <TextBlock x:Name="TxtBurnImageInfo" Text=""
+                                   Foreground="#5A7A9A" FontSize="10"/>
+                        <TextBlock Text="💡 将镜像文件拖放到此处"
+                                   Foreground="#5A7A9A" FontSize="10"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Burn Settings -->
+                <Border Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="🔥 刻录设置" Classes="SectionHeader"/>
+
+                        <Grid ColumnDefinitions="*,*" RowDefinitions="Auto,Auto,Auto">
+                            <StackPanel Grid.Row="0" Grid.Column="0" Spacing="4" Margin="0,0,8,8">
+                                <TextBlock Text="目标光驱" Classes="FieldLabel"/>
+                                <ComboBox x:Name="CmbBurnDrive" HorizontalAlignment="Stretch"
+                                          ToolTip.Tip="要刻录到的光盘驱动器"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1" Spacing="4" Margin="0,0,0,8">
+                                <TextBlock Text="写入速度" Classes="FieldLabel"/>
+                                <ComboBox x:Name="CmbBurnSpeed" HorizontalAlignment="Stretch"
+                                          ToolTip.Tip="刻录的写入速度">
+                                    <ComboBoxItem Content="Auto" IsSelected="True"/>
+                                    <ComboBoxItem Content="1x"/>
+                                    <ComboBoxItem Content="2x"/>
+                                    <ComboBoxItem Content="4x"/>
+                                    <ComboBoxItem Content="8x"/>
+                                    <ComboBoxItem Content="16x"/>
+                                    <ComboBoxItem Content="24x"/>
+                                    <ComboBoxItem Content="48x"/>
+                                    <ComboBoxItem Content="Max"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="0" Spacing="4" Margin="0,0,8,8">
+                                <TextBlock Text="写入模式" Classes="FieldLabel"/>
+                                <ComboBox x:Name="CmbBurnWriteMode" HorizontalAlignment="Stretch"
+                                          ToolTip.Tip="光盘写入模式 — TAO 用于多区段，SAO 用于区段级，DAO 用于整盘封盘">
+                                    <ComboBoxItem Content="TAO (Track At Once)" IsSelected="True"/>
+                                    <ComboBoxItem Content="SAO (Session At Once)"/>
+                                    <ComboBoxItem Content="DAO (Disc At Once)"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="1" Spacing="4" Margin="0,0,0,8">
+                                <TextBlock Text="份数" Classes="FieldLabel"/>
+                                <NumericUpDown x:Name="NumBurnCopies" Minimum="1" Maximum="100"
+                                               Value="1" FormatString="0"
+                                               ToolTip.Tip="要刻录的光盘份数"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <WrapPanel Orientation="Horizontal" Margin="0,4,0,0">
+                            <CheckBox x:Name="ChkBurnEject"
+                                      Content="刻录后弹出" IsChecked="True"
+                                      Margin="0,0,16,6"
+                                      ToolTip.Tip="刻录完成后弹出光盘托盘"/>
+                            <CheckBox x:Name="ChkBurnVerify"
+                                      Content="刻录后校验"
+                                      Margin="0,0,16,6"
+                                      ToolTip.Tip="刻录后校验光盘完整性"/>
+                            <CheckBox x:Name="ChkBurnSimulate"
+                                      Content="仅模拟（不写入）"
+                                      Margin="0,0,16,6"
+                                      ToolTip.Tip="执行模拟刻录而不写入数据"/>
+                            <CheckBox x:Name="ChkBurnBup"
+                                      Content="缓存欠载保护" IsChecked="True"
+                                      Margin="0,0,16,6"
+                                      ToolTip.Tip="启用缓存欠载保护"/>
+                            <CheckBox x:Name="ChkBurnClose"
+                                      Content="封盘" IsChecked="True"
+                                      Margin="0,0,16,6"
+                                      ToolTip.Tip="刻录后关闭光盘区段（无法再写入）"/>
+                        </WrapPanel>
+
+                        <Button Content="🔄 刷新光驱" Classes="ActionBtn"
+                                Click="OnRefreshDrivesClick" Margin="0,4,0,0"
+                                ToolTip.Tip="重新扫描光盘驱动器"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!-- ============================================================ -->
+            <!-- STEP 3: Summary                                              -->
+            <!-- ============================================================ -->
+            <StackPanel x:Name="Step3Panel" IsVisible="False" Spacing="16">
+                <TextBlock Text="摘要 — 执行前确认" Classes="SectionHeader"/>
+
+                <Border Classes="Card">
+                    <StackPanel x:Name="DataSummaryContent" Spacing="8">
+                        <!-- Filled dynamically -->
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!-- ============================================================ -->
+            <!-- STEP 4: Progress                                             -->
+            <!-- ============================================================ -->
+            <StackPanel x:Name="Step4Panel" IsVisible="False" Spacing="16">
+                <TextBlock x:Name="TxtDataStep4Title" Text="正在执行…" Classes="SectionHeader"/>
+
+                <Border Classes="Card">
+                    <StackPanel Spacing="12">
+                        <ProgressBar x:Name="PrgDataExec" Classes="BurnProgress" Value="0"/>
+                        <Grid ColumnDefinitions="*,Auto,Auto,Auto">
+                            <TextBlock x:Name="TxtDataExecStatus" Text="正在准备…"
+                                       Foreground="#8EAFC8" FontSize="12"
+                                       VerticalAlignment="Center"/>
+                            <TextBlock x:Name="TxtDataExecETA" Text=""
+                                       Foreground="#5A7A9A" FontSize="11"
+                                       Grid.Column="1" VerticalAlignment="Center"
+                                       Margin="12,0"/>
+                            <TextBlock x:Name="TxtDataExecSpeed" Text=""
+                                       Foreground="#5A7A9A" FontSize="11"
+                                       Grid.Column="2" VerticalAlignment="Center"
+                                       Margin="12,0"/>
+                            <TextBlock x:Name="TxtDataExecPercent" Text="0%"
+                                       Foreground="#E8F0FE" FontSize="13"
+                                       FontWeight="SemiBold"
+                                       Grid.Column="3" VerticalAlignment="Center"/>
+                        </Grid>
+                        <TextBox x:Name="TxtDataExecLog" Classes="LogBox" Height="200"/>
+                        <!-- Disc Visualization -->
+                        <Border x:Name="DiscVizBorder" Background="#0A1520" CornerRadius="8"
+                                Padding="8" IsVisible="False" Margin="0,8,0,0">
+                            <views:DiscVisualizationControl x:Name="DiscViz" Height="200"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!-- ============================================================ -->
+            <!-- Navigation Buttons                                           -->
+            <!-- ============================================================ -->
+            <Border Classes="InfoCard" Margin="0,8,0,0">
+                <Grid ColumnDefinitions="Auto,*,Auto,Auto">
+                    <Button x:Name="BtnDataBack" Content="← 上一步"
+                            Classes="ActionBtn" Click="OnDataBackClick"
+                            IsVisible="False"
+                            ToolTip.Tip="返回上一步"/>
+                    <Button x:Name="BtnDataNext" Content="下一步 →"
+                            Classes="PrimaryBtn" Grid.Column="2"
+                            Click="OnDataNextClick" IsVisible="False"
+                            ToolTip.Tip="进入下一步"/>
+                    <Button x:Name="BtnDataExecute" Content="🔥 开始"
+                            Classes="PrimaryBtn" Grid.Column="2"
+                            Click="OnDataExecuteClick" IsVisible="False"
+                            ToolTip.Tip="开始操作"/>
+                    <Button x:Name="BtnDataCancel" Content="⏹ 取消"
+                            Classes="DangerBtn" Grid.Column="3"
+                            Margin="8,0,0,0" Click="OnDataCancelClick"
+                            IsVisible="False"
+                            ToolTip.Tip="取消当前操作"/>
+                    <Button x:Name="BtnDataFinish" Content="✅ 完成 — 返回主页"
+                            Classes="PrimaryBtn" Grid.Column="2"
+                            Click="OnDataFinishClick" IsVisible="False"
+                            ToolTip.Tip="操作完成 — 返回第 1 步"/>
+                </Grid>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+
+</UserControl>

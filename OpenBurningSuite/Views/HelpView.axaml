@@ -1,0 +1,754 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="OpenBurningSuite.Views.HelpView"
+             Background="#0C1622">
+
+    <Grid ColumnDefinitions="220,*">
+
+        <!-- Table of Contents sidebar -->
+        <Border Grid.Column="0" Background="#0A1520"
+                BorderBrush="#1E3450" BorderThickness="0,0,1,0">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="10,16,10,16" Spacing="2">
+                    <TextBlock Text="📖 目录"
+                               Foreground="#5A7A9A" FontSize="10"
+                               FontWeight="Bold" Margin="8,0,0,10"/>
+
+                    <Button x:Name="TocOverview" Content="概览"
+                            Classes="NavBtn" Click="OnTocClick" Tag="SectionOverview"/>
+                    <Button x:Name="TocGettingStarted" Content="快速入门"
+                            Classes="NavBtn" Click="OnTocClick" Tag="SectionGettingStarted"/>
+
+                    <TextBlock Text="功能特性"
+                               Foreground="#5A7A9A" FontSize="10"
+                               FontWeight="Bold" Margin="8,12,0,6"/>
+
+                    <Button x:Name="TocDiscover" Content="🔍 发现光驱"
+                            Classes="NavBtn" Click="OnTocClick" Tag="SectionDiscover"/>
+                    <Button x:Name="TocCopyDisc" Content="💿 复制光盘"
+                            Classes="NavBtn" Click="OnTocClick" Tag="SectionCopyDisc"/>
+                    <Button x:Name="TocBuildImage" Content="🏗 构建镜像"
+                            Classes="NavBtn" Click="OnTocClick" Tag="SectionBuildImage"/>
+                    <Button x:Name="TocBurnWrite" Content="🔥 刻录 / 写入"
+                            Classes="NavBtn" Click="OnTocClick" Tag="SectionBurnWrite"/>
+                    <Button x:Name="TocVerify" Content="✅ 校验"
+                            Classes="NavBtn" Click="OnTocClick" Tag="SectionVerify"/>
+                    <Button x:Name="TocAdvanced" Content="⚙&#xFE0F; 高级"
+                            Classes="NavBtn" Click="OnTocClick" Tag="SectionAdvanced"/>
+                    <Button x:Name="TocEncryption" Content="🔒 加密"
+                            Classes="NavBtn" Click="OnTocClick" Tag="SectionEncryption"/>
+
+                    <TextBlock Text="向导"
+                               Foreground="#5A7A9A" FontSize="10"
+                               FontWeight="Bold" Margin="8,12,0,6"/>
+
+                    <Button x:Name="TocAudioWizard" Content="🎵 音频向导"
+                            Classes="NavBtn" Click="OnTocClick" Tag="SectionAudioWizard"/>
+                    <Button x:Name="TocVideoWizard" Content="🎬 视频向导"
+                            Classes="NavBtn" Click="OnTocClick" Tag="SectionVideoWizard"/>
+                    <Button x:Name="TocDataWizard" Content="📁 数据向导"
+                            Classes="NavBtn" Click="OnTocClick" Tag="SectionDataWizard"/>
+                    <Button x:Name="TocGameWizard" Content="🎮 游戏向导"
+                            Classes="NavBtn" Click="OnTocClick" Tag="SectionGameWizard"/>
+                    <Button x:Name="TocCopyWizard" Content="💿 复制向导"
+                            Classes="NavBtn" Click="OnTocClick" Tag="SectionCopyWizard"/>
+                    <Button x:Name="TocBlankWizard" Content="🧹 擦除向导"
+                            Classes="NavBtn" Click="OnTocClick" Tag="SectionBlankWizard"/>
+
+                    <TextBlock Text="参考"
+                               Foreground="#5A7A9A" FontSize="10"
+                               FontWeight="Bold" Margin="8,12,0,6"/>
+
+                    <Button x:Name="TocDiscTypes" Content="📀 光盘类型"
+                            Classes="NavBtn" Click="OnTocClick" Tag="SectionDiscTypes"/>
+                    <Button x:Name="TocFileSystems" Content="📂 文件系统"
+                            Classes="NavBtn" Click="OnTocClick" Tag="SectionFileSystems"/>
+                    <Button x:Name="TocImageFormats" Content="💾 镜像格式"
+                            Classes="NavBtn" Click="OnTocClick" Tag="SectionImageFormats"/>
+                    <Button x:Name="TocGlossary" Content="📘 术语表"
+                            Classes="NavBtn" Click="OnTocClick" Tag="SectionGlossary"/>
+                    <Button x:Name="TocTroubleshooting" Content="🔧 故障排查"
+                            Classes="NavBtn" Click="OnTocClick" Tag="SectionTroubleshooting"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <!-- Main content area -->
+        <ScrollViewer x:Name="ContentScroller" Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="28,24,28,40" Spacing="24">
+
+                <!-- Page header -->
+                <StackPanel Spacing="4">
+                    <TextBlock Text="📖  帮助与文档"
+                               Classes="PageTitle" Foreground="#5BC0FF"/>
+                    <TextBlock Text="关于 Open Burning Suite 的全部信息——从快速入门指南到深入的技术细节。"
+                               Classes="PageSubtitle" TextWrapping="Wrap"/>
+                </StackPanel>
+
+                <!-- ============================================================ -->
+                <!-- OVERVIEW                                                      -->
+                <!-- ============================================================ -->
+                <Border x:Name="SectionOverview" Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="概览" Classes="SectionHeader" FontSize="18"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#E8F0FE" LineHeight="22">
+                            <Run Text="Open Burning Suite"/><Run Text=" 是一款专业的跨平台光盘制作、刻录、读取与校验应用，可运行于 "/><Run Text="Windows、Linux 和 macOS" FontWeight="SemiBold"/><Run Text="，支持从 CD 到蓝光 BDXL 及 HD DVD 的各类光盘介质。"/>
+                        </TextBlock>
+
+                        <TextBlock Text="Open Burning Suite 能做什么？" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="• 发现光驱，查看其能力与已放入的介质&#x0a;• 将光盘复制（抓取）为多种格式的镜像文件&#x0a;• 从文件与文件夹构建光盘镜像（数据、音频、视频、游戏）&#x0a;• 将光盘镜像刻录到 CD、DVD、HD DVD 或蓝光介质&#x0a;• 通过校验和与逐扇区比对校验光盘完整性&#x0a;• 擦除并格式化可重写介质&#x0a;• 制作带 CD-TEXT 文本的音频 CD、视频 DVD、蓝光光盘、VCD、SVCD 与 XSVCD&#x0a;• 使用各游戏机专用预设制作游戏光盘镜像&#x0a;• 制作支持 El Torito 引导的可引导光盘&#x0a;• 使用 AES-256 密码保护加密与解密光盘镜像（.obse 格式）"/>
+
+                        <Border Classes="InfoCard" Padding="12">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="🔒 提权（管理员 / Root）说明" Foreground="#FF8C00" FontWeight="SemiBold" FontSize="12"/>
+                                <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" FontSize="11" LineHeight="18"
+                                           Text="许多光盘操作需要直接访问硬件。在 Windows 上请以管理员身份运行本应用；在 Linux 和 macOS 上请以 root 权限（sudo）运行。底部状态栏会显示应用当前是否以提权方式运行。未提权时，部分功能（刻录、擦除、直接读取）可能无法使用。"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- ============================================================ -->
+                <!-- GETTING STARTED                                               -->
+                <!-- ============================================================ -->
+                <Border x:Name="SectionGettingStarted" Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="快速入门" Classes="SectionHeader" FontSize="18"/>
+
+                        <TextBlock Text="主窗口" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="启动 Open Burning Suite 后，首先看到的是主页。左侧是包含所有可用视图的侧边栏导航，右上角有主页、设置和帮助按钮，底部状态栏显示上下文消息与提权状态。"/>
+
+                        <TextBlock Text="导航" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="使用侧边栏在各视图之间切换：&#x0a;&#x0a;  • 主页 — 快速开始磁贴与功能概览&#x0a;  • 发现 — 扫描光驱并探测介质&#x0a;  • 复制光盘 — 读取/抓取光盘为镜像文件&#x0a;  • 构建镜像 — 从文件创建光盘镜像&#x0a;  • 刻录 / 写入 — 将镜像写入光盘介质&#x0a;  • 校验 — 检查光盘或镜像的完整性&#x0a;  • 高级 — 擦除、格式化光盘&#x0a;&#x0a;侧边栏的“快速开始”下还提供音频、视频、数据、游戏、复制光盘和擦除光盘操作的分步向导。"/>
+
+                        <TextBlock Text="通用流程" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="典型流程如下：&#x0a;&#x0a;  1. 发现 — 确认光驱已被识别，并检查介质状态&#x0a;  2. 构建（可选）— 若尚无镜像，先从文件创建光盘镜像&#x0a;  3. 刻录 — 将镜像写入光盘&#x0a;  4. 校验 — 确认刻录已正确完成&#x0a;&#x0a;也可以使用“快速开始”中的向导，按步骤完成整个流程。"/>
+
+                        <TextBlock Text="工具提示" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="应用中的几乎所有按钮、复选框和下拉框都带有工具提示。将鼠标悬停在任意控件上，即可看到其功能的简要说明。"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- ============================================================ -->
+                <!-- DISCOVER DRIVES &amp; MEDIA                                   -->
+                <!-- ============================================================ -->
+                <Border x:Name="SectionDiscover" Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="🔍 发现光驱与介质" Classes="SectionHeader" FontSize="18"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="“发现”视图会扫描系统中的光驱并检查已放入的介质。在执行任何光盘操作之前，通常应先检查此项。"/>
+
+                        <TextBlock Text="光驱列表" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="点击“刷新光驱”扫描已连接的光驱。列表显示：&#x0a;&#x0a;  • 设备路径 — 系统设备路径（例如 Linux 上的 /dev/sr0、Windows 上的 \\.\CdRom0）&#x0a;  • 盘符 — Windows 驱动器号（例如 D:）&#x0a;  • 型号 — 光驱的厂商与型号名称&#x0a;  • 类型 — 光驱类别（CD-ROM、DVD-RW、BD-RE 等）&#x0a;  • 状态 — 是否已放入光盘，或托盘为空"/>
+
+                        <TextBlock Text="光盘信息" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="从下拉框中选择光驱，然后点击“探测介质”读取已放入光盘的详细信息：&#x0a;&#x0a;  • 介质类型 — 具体的光盘格式（CD-R、DVD+R DL、BD-RE 等）&#x0a;  • 光盘状态 — 空白（可写）、可追加（多区段且尚有余量）或已关闭（已封盘）&#x0a;  • 卷标 — 光盘上存储的名称&#x0a;  • 容量 — 介质的总存储容量&#x0a;  • 已用 / 可用 — 已占用与剩余空间&#x0a;  • 文件系统 — 检测到的文件系统（ISO 9660、UDF、Joliet、HFS+）&#x0a;  • 区段 — 光盘上的区段数量（多区段光盘多于一个）&#x0a;  • 轨道 — 数据轨道与音频轨道的数量"/>
+
+                        <TextBlock Text="光驱能力" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="显示所选光驱可读写的介质类型：CD、DVD、HD DVD 和蓝光，并列出所有支持的写入速度。"/>
+
+                        <Border Classes="InfoCard" Padding="12">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="💡 技术细节" Foreground="#1E90FF" FontWeight="SemiBold" FontSize="11"/>
+                                <TextBlock TextWrapping="Wrap" Foreground="#8EAFC8" FontSize="11" LineHeight="16"
+                                           Text="光驱发现使用平台原生 API：Linux 上的 SCSI Generic（SG_IO）、Windows 上的 IOCTL_SCSI_PASS_THROUGH_DIRECT，以及 macOS 上的 IOKit SCSITaskLib。介质探测通过发送 MMC READ DISC INFORMATION 与 READ TRACK INFORMATION 等 SCSI 指令读取光盘元数据。所有 sense data 缓冲区均为 252 字节，符合 SPC-5 规范。"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- ============================================================ -->
+                <!-- COPY DISC                                                     -->
+                <!-- ============================================================ -->
+                <Border x:Name="SectionCopyDisc" Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="💿 复制光盘为镜像" Classes="SectionHeader" FontSize="18"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="“复制光盘”视图读取光盘并保存为计算机上的镜像文件，适用于制作备份、归档光盘，或为后续刻录准备镜像。"/>
+
+                        <TextBlock Text="源与输出" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • 光驱 — 选择装有待复制光盘的光驱&#x0a;  • 输出格式 — 选择镜像文件格式：ISO（标准）、BIN/CUE（原始扇区并附带 CUE 索引文件）、BIN/CUE/SBI（原始扇区并附带 PS1 的 LibCrypt 子通道 Q 数据）、MDF/MDS、NRG（Nero）、IMG（原始）、CDI（DiscJuggler）、CCD/IMG/SUB（带子通道的 CloneCD）、TOC/BIN、VCD、SVCD、XSVCD 或 XISO（Xbox）&#x0a;  • 输出路径 — 镜像文件的保存位置（也可以拖放文件路径）"/>
+
+                        <TextBlock Text="复制选项" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • 读取速度 — 读取光盘的速度。较低速度（如 4x、8x）可提高受损或划伤光盘的读取准确性，但耗时更长。最高速度最快，但在介质状况不佳时可能产生错误。&#x0a;&#x0a;  • 错误恢复 — 控制无法读取某个扇区时的行为：&#x0a;      – 是（跳过并重试）：对失败扇区重试若干次后跳过&#x0a;      – 否（忽略错误）：直接继续读取，不重试&#x0a;      – 出错即中止：一旦发生错误就停止整个读取过程&#x0a;&#x0a;  • 重试次数 — 每个失败扇区的重试次数（0–20）。重试更多次可从临界扇区恢复数据，但会增加读取时间。&#x0a;&#x0a;  • 扇区大小 — 每个扇区的字节数：&#x0a;      – 2048 字节：标准数据扇区大小（适用于大多数数据光盘）&#x0a;      – 2352 字节：原始扇区大小（包含全部纠错码、同步模式与头部——音频 CD 与精确光盘镜像所必需）&#x0a;&#x0a;  • 子通道模式 — 控制是否在主扇区之外提取子通道数据：&#x0a;      – 无：不提取子通道数据（最快，对大多数数据光盘足够）&#x0a;      – 原始：提取原始子通道数据（每扇区 96 字节）&#x0a;      – 其他模式可能因光盘类型而异&#x0a;      对于受复制保护的光盘和许多游戏光盘格式，子通道数据至关重要。&#x0a;&#x0a;  • 音频精确抓取模式 — 针对音频 CD 的额外纠错。对每个扇区多次读取并交叉比对结果，以生成位精确的音频副本，建议用于划伤或受损的音频 CD。&#x0a;&#x0a;  • 抖动校正 — 在音频读取过程中校正抖动（时序漂移），默认启用，有助于确保音频抓取达到采样级精确。&#x0a;&#x0a;  • 读取所有扇区（含坏扇区）— 强制读取器尝试光盘上的每一个扇区，包括被标记为坏扇区的部分。适用于取证或归档用途。"/>
+
+                        <TextBlock Text="游戏机预设" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="针对多种游戏机的预配置设置。选择预设后会自动配置扇区大小、子通道模式与错误恢复方式，以满足该平台的要求。支持的系统包括 PlayStation 1–5、PSP（UMD）、Sega Saturn、Dreamcast、Mega CD、Xbox、Xbox 360、Xbox One/Series、GameCube、Wii、Wii U、Neo Geo CD、3DO、Philips CD-i、PC Engine CD、Atari Jaguar CD 以及 Amiga CD32/CDTV。"/>
+
+                        <Border Classes="InfoCard" Padding="12">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="💡 技术细节" Foreground="#1E90FF" FontWeight="SemiBold" FontSize="11"/>
+                                <TextBlock TextWrapping="Wrap" Foreground="#8EAFC8" FontSize="11" LineHeight="16"
+                                           Text="原始扇区读取使用 MMC READ CD 指令（操作码 0xBE），并指定预期扇区类型与子通道选择字段。标准读取使用 READ(10)，每扇区 2048 字节。音频扇区通过精确抓取模式以多次重叠读取来检测并纠正 C1/C2 错误。抖动校正会在连续读取之间对齐音频采样，以消除读取间的偏移漂移。"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- ============================================================ -->
+                <!-- BUILD IMAGE                                                   -->
+                <!-- ============================================================ -->
+                <Border x:Name="SectionBuildImage" Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="🏗 构建光盘镜像" Classes="SectionHeader" FontSize="18"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="“构建镜像”视图可从计算机上的文件与文件夹创建光盘镜像，可制作数据光盘、音频 CD、可引导光盘等。"/>
+
+                        <TextBlock Text="光盘与文件系统设置" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • 光盘类型 — 目标光盘类型（CD、DVD、蓝光等），决定容量指示。&#x0a;  • 文件系统 — 镜像使用的文件系统格式：&#x0a;      – ISO 9660：通用标准，几乎兼容所有操作系统与设备。&#x0a;      – Joliet：ISO 9660 的扩展，增加长文件名（最多 64 个字符）与 Unicode 支持。&#x0a;      – UDF：现代文件系统，支持大文件（&gt;4 GB），DVD-Video、蓝光和大型数据光盘必需。&#x0a;      – Rock Ridge：增加 POSIX 元数据（权限、符号链接、长文件名）的扩展——主要用于 Linux/Unix。&#x0a;      – HFS+：Apple 的文件系统，用于兼容 macOS。&#x0a;  • 卷标 — 光盘挂载时显示的名称（例如在文件资源管理器或 Finder 中）。&#x0a;  • 容量 — 根据所选光盘类型显示目标容量。"/>
+
+                        <TextBlock Text="源与输出" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • 源文件夹 — 包含要添加到光盘镜像的文件所在的文件夹，也可以直接拖放。&#x0a;  • 输出镜像 — .iso（或其他格式）文件的保存路径。&#x0a;  • 出版者 — 写入光盘元数据的出版者名称（可选）。&#x0a;  • 制作者 — 光盘元数据中的数据制作者标识（可选）。&#x0a;  • 应用程序 — 光盘元数据中的应用程序标识（可选）。"/>
+
+                        <TextBlock Text="高级选项" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • Joliet 长文件名 — 允许通过 Joliet 使用超过 64 个字符的文件名（可能降低与旧系统的兼容性）。&#x0a;  • Rock Ridge 扩展 — 添加 POSIX 元数据（权限、符号链接、长文件名）以兼容 Linux/Unix。&#x0a;  • 深层目录嵌套 — 允许超过 8 层的目录结构（放宽 ISO 9660 的限制）。&#x0a;  • 允许小写文件名 — 允许 ISO 9660 文件名使用小写字符（非标准，但已被广泛支持）。&#x0a;  • 允许特殊字符 — 允许文件名使用 ISO 9660 d 字符集之外的字符。&#x0a;  • 补零填充光盘 — 用零填充未使用空间，某些较旧的读取设备有此要求。&#x0a;  • 排序文件 — 在每个目录内按字母顺序排列文件。&#x0a;  • 字符集 — 文件名的字符编码：UTF-8（推荐）、ISO-8859-1（西欧）或 ASCII。"/>
+
+                        <TextBlock Text="引导镜像（El Torito）" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="使用 El Torito 引导标准创建可引导光盘：&#x0a;&#x0a;  • 创建可引导光盘 — 在光盘上启用 El Torito 引导目录。&#x0a;  • 引导镜像文件 — 引导镜像的路径（例如 isolinux.bin、GRUB 镜像）。&#x0a;  • 仿真模式：&#x0a;      – 不仿真：用于现代引导程序（ISOLINUX、GRUB），最常用。&#x0a;      – 软盘（1.2 / 1.44 / 2.88 MB）：模拟软盘，用于兼容传统 BIOS。&#x0a;      – 硬盘：模拟硬盘引导设备。&#x0a;  • 平台：x86（BIOS）、PowerPC、Mac 或 EFI（UEFI）。&#x0a;  • 加载段 — 加载引导镜像的内存地址（十六进制，0 = 默认 0x07C0）。&#x0a;  • 扇区数 — 要加载的 512 字节虚拟扇区数（0 = 自动检测）。&#x0a;  • 修补引导信息表 — ISOLINUX 与 GRUB 必需。将 LBA 与大小信息修补到引导镜像中。&#x0a;  • EFI 双引导镜像 — 用于 UEFI 的可选第二引导镜像，可实现 BIOS+UEFI 双引导。"/>
+
+                        <TextBlock Text="CD-XA 与 CD-i 选项" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • CD-ROM XA 模式 — 将光盘标记为 CD-ROM XA（Mode 2 扇区），VCD/SVCD 光盘与 CD-i 必需。会向主卷描述符中注入 CD-XA001 标记。&#x0a;  • 包含 CD-i 应用模块 — 添加一个最小的 CD-i 应用模块，以便在 Philips CD-i 播放机上播放 VCD（Green Book 标准）。仅适用于 VCD 构建。"/>
+
+                        <TextBlock Text="音频 CD 制作" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="制作音频 CD，可选地将 CD-TEXT 文本元数据嵌入子通道：&#x0a;&#x0a;  • 专辑标题、艺术家、词作者、作曲、编曲 — 兼容播放机上可见的 CD-TEXT 字段。&#x0a;  • 流派、光盘信息 — 其他 CD-TEXT 元数据。&#x0a;  • MCN/UPC — 13 位媒体目录号（UPC/EAN 条码）。&#x0a;  • 轨道列表 — 添加音频轨道（WAV 文件），并可为每条轨道设置标题与艺术家。&#x0a;&#x0a;CD-TEXT 数据存储在光盘的 Q 子通道中，可由车载音响、CD 播放机及支持该功能的软件显示。"/>
+
+                        <Border Classes="InfoCard" Padding="12">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="💡 技术细节" Foreground="#1E90FF" FontWeight="SemiBold" FontSize="11"/>
+                                <TextBlock TextWrapping="Wrap" Foreground="#8EAFC8" FontSize="11" LineHeight="16"
+                                           Text="ISO 9660 镜像的写入顺序为：系统区（32 KB）、主卷描述符（PVD）、可选的补充描述符（Joliet SVD、El Torito 引导目录）、路径表与目录记录，随后是文件数据区。UDF 镜像遵循 ECMA-167 / OSTA UDF 规范。El Torito 引导目录引用初始/默认条目的引导镜像。音频 CD 镜像由 2352 字节的原始 PCM 扇区组成，采样率 44100 Hz、16 位立体声。CD-TEXT 数据包按 Red Book 附录 J 以 18 字节的 R-W 子通道包写入。"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- ============================================================ -->
+                <!-- BURN / WRITE                                                  -->
+                <!-- ============================================================ -->
+                <Border x:Name="SectionBurnWrite" Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="🔥 刻录 / 写入光盘" Classes="SectionHeader" FontSize="18"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="“刻录”视图可将光盘镜像写入光盘介质，也可直接构建并刻录（即时刻录）。支持从 CD-R 到 BDXL 的所有常见介质类型。"/>
+
+                        <TextBlock Text="源模式" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="选择待刻录数据的提供方式：&#x0a;&#x0a;  • 镜像文件 — 刻录已有的光盘镜像文件（.iso、.bin、.nrg、.mdf、.cdi、.ccd、.img）。可浏览选择或拖放文件。非原生格式（NRG、MDF/MDS、CDI、CCD、IMG）会自动转换为 BIN/CUE 后再刻录。&#x0a;  • 即时构建 — 选择文件与文件夹，直接构建并刻录到光盘，无需先生成独立的镜像文件。可指定源文件夹、添加单个文件/文件夹、设置卷标并选择文件系统。"/>
+
+                        <TextBlock Text="目标光驱与写入设置" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • 光驱 — 选择用于写入的刻录机。&#x0a;  • 写入速度 — 刻录速度。较低速度（如 4x、8x）刻录更可靠、错误更少，尤其在低质量介质上。最高速度会使用光驱与介质支持的最高值。&#x0a;  • 写入模式：&#x0a;      – DAO（Disc-At-Once，整盘一次写入）：一次连续写完整个光盘，轨道间无间隙。最适合音频 CD、游戏光盘与单区段数据光盘，写入过程中激光不会关闭。&#x0a;      – TAO（Track-At-Once，单轨道写入）：逐条轨道写入，轨道间有 2 秒间隙。支持多区段，适用于数据光盘。&#x0a;      – SAO（Session-At-Once，单区段写入）：每次写入一个完整区段。&#x0a;  • 份数 — 要刻录的光盘份数（1–99）。每份之间应用会提示插入新的介质。"/>
+
+                        <TextBlock Text="刻录选项" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • 刻录后弹出 — 刻录完成后自动打开光盘托盘，便于取出光盘或放入新盘。&#x0a;&#x0a;  • 刻录后校验 — 刻录完成后回读整张光盘并与源镜像比对，重要数据强烈建议启用。&#x0a;&#x0a;  • 模拟刻录 / 测试写入 — 执行完整的刻录模拟（激光开启，但使用测试功率），不实际写入数据。可在正式刻录前验证光驱、介质与设置是否正常。&#x0a;&#x0a;  • 缓存欠载保护 — 在数据缓冲区不足时暂停并恢复激光，避免缓存欠载错误。几乎所有现代光驱都支持（BURN-Proof、SafeBurn 等）。除非有特殊理由，否则应保持启用。&#x0a;&#x0a;  • 关闭 / 封盘 — 关闭光盘区段，使其可被独立播放机和不支持写入的光驱读取。DVD-Video、蓝光和音频 CD 需要在消费类设备上播放时必须执行。禁用后光盘保持可追加状态，以便多区段写入。&#x0a;&#x0a;  • 超刻 — 写入超出光盘标称容量。存在风险——光盘外圈可靠性较低。仅在确认介质可承受时使用。超刻上限（MB）控制超出标称容量的写入量。"/>
+
+                        <TextBlock Text="多区段" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="控制光盘后续是否还能追加数据：&#x0a;&#x0a;  • 关闭（单区段）— 写入一个区段并封盘，之后无法再追加数据。&#x0a;  • 开始（多区段）— 新建一张多区段光盘，之后可继续追加区段。&#x0a;  • 继续（追加区段）— 在现有多区段光盘上追加一个新区段。&#x0a;&#x0a;多区段仅受 CD-R、CD-RW、DVD-R、DVD+R 及部分 BD-R 介质支持。每个区段都有额外开销（CD 约 13 MB，DVD 约 30 MB），因此总可用容量会随区段增加而减少。"/>
+
+                        <TextBlock Text="高级选项" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • 强制介质类型 — 覆盖自动介质类型检测。当光驱误判介质时很有用。&#x0a;  • BD-R 模式 — 蓝光可记录光盘的写入模式：&#x0a;      – SRM（顺序记录模式）：标准顺序写入。&#x0a;      – SRM+POW：支持伪覆盖的顺序写入。&#x0a;      – RRM（随机记录模式）：允许随机访问写入（在 BD-R 上获得类似 BD-RE 的行为）。&#x0a;  • DVD 换层点 — 双层 DVD 的换层位置（以扇区计）。设为 0 表示自动确定。换层点位置不当可能导致 DVD 播放机播放异常。"/>
+
+                        <TextBlock Text="游戏补丁与特殊格式" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • LibCrypt 保护（PS1）— 使用 .sbi 文件对 PlayStation 1 游戏应用 LibCrypt 子通道修补。SBI 文件包含受保护扇区的信息。&#x0a;  • Dreamcast GDI/CDI 修补 — 对 GDI 或 CDI 格式的 Sega Dreamcast 光盘镜像应用专用补丁。&#x0a;  • 全区修补 — 移除光盘镜像中的区域锁定限制。&#x0a;  • 引导扇区修补 — 修补引导扇区，以兼容修改过固件的游戏机。&#x0a;  • ESR 补丁（PS2 DVD-R）— 向 PS2 ISO 镜像注入 DVD-Video UDF 结构，使 MechaCon 控制器将该光盘识别为 DVD-Video，从而绕过 DVD-R 介质上的 PS2 认证检查。&#x0a;  • Master Disc 补丁（PS2）— 将“PlayStation Master Disc”标识写入第 12–13 扇区，供 MechaPwn DEX PS2 主机使用。支持 NTSC-J、NTSC-U、PAL 和 WORLD 区域设置。&#x0a;  • PSX 80 分钟补丁（PS1/PS2 CD-R）— 向原始 BIN 镜像追加 27,000 个空扇区（每个 2352 字节），以兼容 PlayStation 主机上的 80 分钟 CD-R 介质。&#x0a;  • PSX 去抖动补丁（PS1）— 扫描原始 PS1 BIN 镜像中的 GPU 抖动图案并将其修补去除，从而在现代显示器上改善画质。&#x0a;&#x0a;⚠&#xFE0F; 游戏补丁仅应在拥有合法软件的前提下使用。"/>
+
+                        <Border Classes="InfoCard" Padding="12">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="💡 技术细节" Foreground="#1E90FF" FontWeight="SemiBold" FontSize="11"/>
+                                <TextBlock TextWrapping="Wrap" Foreground="#8EAFC8" FontSize="11" LineHeight="16"
+                                           Text="刻录 DVD/蓝光介质时使用 MMC WRITE(12) 指令（32 位传输长度以降低指令开销），刻录标准音频/数据 CD 时使用 WRITE(10)（16 位传输长度）。DAO 模式在发送 WRITE 指令前通过 SET WRITE PARAMETERS 模式页配置光驱。缓存欠载保护通过写入参数模式页中的 BURN-Free 位启用。光盘可视化会实时显示当前 LBA（逻辑块地址）映射到光盘螺旋轨道上的物理位置。"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- ============================================================ -->
+                <!-- VERIFY                                                        -->
+                <!-- ============================================================ -->
+                <Border x:Name="SectionVerify" Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="✅ 校验 / 检查" Classes="SectionHeader" FontSize="18"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="“校验”视图可检查光盘完整性、将光盘与镜像文件比对，或验证镜像的校验和。校验是确保刻录光盘无错误的关键步骤。"/>
+
+                        <TextBlock Text="校验模式" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • 校验光盘 — 读取光盘上的每个扇区并计算校验和，报告中扇区、好扇区与坏扇区的数量。可用于检查光盘的整体健康状况。&#x0a;&#x0a;  • 光盘与镜像比对 — 读取光盘并与镜像文件逐扇区比对，可发现实际刻录内容与原始镜像之间的任何差异。&#x0a;&#x0a;  • 检查镜像完整性 — 无需光盘即可计算镜像文件的校验和，适合验证下载的镜像是否与公布的校验和一致。"/>
+
+                        <TextBlock Text="校验选项" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • 校验和类型 — 使用的哈希算法：&#x0a;      – SHA-256：强度高、应用广泛，推荐日常使用。&#x0a;      – SHA-1：较旧但仍然常见。&#x0a;      – MD5：速度快但加密强度弱，用于数据完整性检查尚可。&#x0a;      – SHA-512：强度最高，速度略慢。&#x0a;      – CRC32：速度极快，但仅 32 位校验，适合快速初步检查。&#x0a;&#x0a;  • 逐扇区比对 — 逐个扇区进行比对（更彻底但更慢），推荐使用。&#x0a;  • 校验子通道数据 — 同时检查与主扇区一同存储的子通道数据。&#x0a;  • 音频轨道校验 — 启用后会一并读取并校验光盘上的音频轨道数据。对于混合模式 CD（如带音轨的 PS1 游戏）的完整校验必不可少。禁用时仅比对数据轨道。"/>
+
+                        <TextBlock Text="结果" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="校验完成后，“结果”面板会显示：&#x0a;  • 已扫描扇区总数&#x0a;  • 好扇区（通过）&#x0a;  • 坏扇区（错误或不匹配）&#x0a;  • 校验和值（可复制到剪贴板）&#x0a;  • 总体结果（通过 ✅ 或失败 ❌）&#x0a;&#x0a;光盘可视化会在虚拟光盘螺旋上实时显示校验进度。"/>
+
+                        <Border Classes="InfoCard" Padding="12">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="💡 技术细节" Foreground="#1E90FF" FontWeight="SemiBold" FontSize="11"/>
+                                <TextBlock TextWrapping="Wrap" Foreground="#8EAFC8" FontSize="11" LineHeight="16"
+                                           Text="对于原始 BIN/CUE 镜像，光盘校验使用 READ CD（原始 2352 字节扇区）而非 READ(10)。每个扇区按其同步模式单独分类：带有 CD 同步模式的扇区为数据扇区（从中提取 2048 字节用户数据），不带同步模式的扇区为音频扇区。启用音频轨道校验后，音频扇区按完整的每扇区 2352 字节计算哈希。光盘侧与镜像侧使用完全相同的逐扇区分类逻辑，因此无论 CUE 布局为单文件还是多文件、预间隙如何布置，校验和都保持一致。对于混合模式 CD，数据与音频轨道之间的 150 帧预间隙会被正确处理：数据范围排除预间隙（其中包含音频格式的扇区），而在启用音频轨道校验时音频范围会包含它。若按初始预期扇区类型读取失败，引擎会以 CD-DA 类型重试，以恢复轨道边界附近的预间隙扇区。光盘可视化将 LBA 位置映射为光盘螺旋上的物理半径（从内圈轮毂到外缘）。"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- ============================================================ -->
+                <!-- ADVANCED                                                      -->
+                <!-- ============================================================ -->
+                <Border x:Name="SectionAdvanced" Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="⚙&#xFE0F; 高级工具" Classes="SectionHeader" FontSize="18"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="“高级”视图提供直接的光驱操作：弹出/载入托盘、擦除可重写光盘以及格式化介质。"/>
+
+                        <TextBlock Text="弹出 / 载入托盘" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • 弹出托盘 — 打开光盘托盘，以便放入或取出光盘。&#x0a;  • 载入托盘 — 关闭光盘托盘（适用于电动托盘的光驱）。"/>
+
+                        <TextBlock Text="擦除可重写光盘" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="擦除 CD-RW、DVD±RW 或 BD-RE 介质，使其可重新写入：&#x0a;&#x0a;  • 快速擦除 — 仅擦除目录（TOC）与导入区。速度极快（数秒），但旧数据仍物理保留在光盘上，可能被专用工具恢复。&#x0a;&#x0a;  • 完全擦除 — 用零覆盖整个光盘表面。耗时较长（CD-RW 约 10–30 分钟，DVD/BD 更久），但可确保不残留旧数据。&#x0a;&#x0a;向可重写光盘写入新数据前必须先擦除（除非光驱支持自动覆盖，如 DVD+RW 与 BD-RE）。"/>
+
+                        <TextBlock Text="格式化光盘" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="格式化 DVD+RW、DVD-RAM、BD-R、BD-RE 或 HD DVD-RW 介质。部分介质类型在首次使用前需要格式化：&#x0a;&#x0a;  • 快速格式化 — 在不做完整表面认证的情况下准备好光盘，速度快。&#x0a;  • 完全格式化 — 对整张光盘进行表面认证，速度较慢，但可确保光盘完整性。建议用于归档用途和 BD-R 介质。&#x0a;&#x0a;注意：DVD+RW 介质首次使用前必须格式化。BD-RE 与 DVD-RAM 格式化后表现更好，但通常也可直接使用。"/>
+
+                        <Border Classes="InfoCard" Padding="12">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="💡 技术细节" Foreground="#1E90FF" FontWeight="SemiBold" FontSize="11"/>
+                                <TextBlock TextWrapping="Wrap" Foreground="#8EAFC8" FontSize="11" LineHeight="16"
+                                           Text="擦除会发送 MMC BLANK 指令（操作码 0xA1），类型为 0x00（完全）或 0x01（最小/快速）。格式化使用 FORMAT UNIT 指令（操作码 0x04），并针对每种介质类型使用相应的格式描述符。托盘操作使用 START STOP UNIT（操作码 0x1B）以及 LoEj 和 Start 位。"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- ============================================================ -->
+                <!-- DISC IMAGE ENCRYPTION                                         -->
+                <!-- ============================================================ -->
+                <Border x:Name="SectionEncryption" Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="🔒 光盘镜像加密" Classes="SectionHeader" FontSize="18"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="Open Burning Suite 内置光盘镜像加密功能，用于保护敏感备份。可对任意光盘镜像文件进行密码加密，并在需要刻录或校验时解密。"/>
+
+                        <TextBlock Text="加密" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="要加密光盘镜像，请选择镜像文件并设置强密码。加密后的镜像以 .obse 扩展名保存（Open Burning Suite Encrypted），原始文件不会被修改。"/>
+
+                        <TextBlock Text="解密" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="选择 .obse 文件进行刻录或校验时，应用会提示输入解密密码。操作开始前会透明地解密镜像。"/>
+
+                        <Border Classes="InfoCard" Padding="12">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="💡 技术细节" Foreground="#1E90FF" FontWeight="SemiBold" FontSize="11"/>
+                                <TextBlock TextWrapping="Wrap" Foreground="#8EAFC8" FontSize="11" LineHeight="16"
+                                           Text="加密采用 AES-256-CBC，并通过 PBKDF2（RFC 8018）从密码派生密钥。文件头包含魔数字节“OBSE”、格式版本、KDF 盐值、初始化向量、HMAC-SHA256 完整性标签以及原始文件大小。解密开始前会通过 HMAC 验证加密载荷未被篡改。"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- ============================================================ -->
+                <!-- AUDIO WIZARD                                                  -->
+                <!-- ============================================================ -->
+                <Border x:Name="SectionAudioWizard" Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="🎵 音频与音乐向导" Classes="SectionHeader" FontSize="18"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="音频向导会分步引导你制作音频 CD、将音乐文件复制到光盘，或抓取音频 CD。它面向希望以简单引导方式完成操作的用户。"/>
+
+                        <TextBlock Text="第 1 步 — 选择任务" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • 制作音频 CD — 从 WAV、FLAC 或 MP3 文件构建并刻录 Red Book 音频 CD，成品可在任何标准 CD 播放机中播放。&#x0a;  • 抓取音频 CD — 将音频 CD 中的音轨提取为独立的 WAV 文件，或保存为原始 BIN/CUE 音频镜像。&#x0a;  • 复制音乐到光盘 — 将音频文件以数据文件形式（MP3、FLAC 等）刻录到光盘，供支持这些格式的设备播放。"/>
+
+                        <TextBlock Text="第 2 步 — 配置" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="根据所选任务，可配置轨道列表、CD-TEXT 文本元数据（专辑、艺术家、各轨道标题）、输出格式与质量设置、光驱选择以及写入速度。"/>
+
+                        <TextBlock Text="第 3 步 — 摘要" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="执行前请核对所有设置。向导会显示轨道、总时长、目标介质以及全部已配置选项的摘要。"/>
+
+                        <TextBlock Text="第 4 步 — 执行" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="操作执行时会显示进度条与日志输出，随时可以取消。"/>
+
+                        <Border Classes="InfoCard" Padding="12">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="💡 音频 CD 格式" Foreground="#1E90FF" FontWeight="SemiBold" FontSize="11"/>
+                                <TextBlock TextWrapping="Wrap" Foreground="#8EAFC8" FontSize="11" LineHeight="16"
+                                           Text="Red Book 音频 CD 以 44,100 Hz 采样率、16 位深度、立体声（2 声道）存储未压缩的 PCM 音频。每个音频扇区为 2,352 字节，容纳 1/75 秒的音频。一张标准 74 分钟光盘约含 333,000 个音频扇区。CD-TEXT 数据按 Red Book 附录 J / MMC-3 编码在 R-W 子通道包中（每包 18 字节）。WAV 文件会被转换，FLAC 与 MP3 文件在刻录前解码为 PCM。"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- ============================================================ -->
+                <!-- VIDEO WIZARD                                                  -->
+                <!-- ============================================================ -->
+                <Border x:Name="SectionVideoWizard" Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="🎬 视频光盘向导" Classes="SectionHeader" FontSize="18"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="视频向导引导你制作可在独立播放机中播放的视频光盘：DVD-Video、蓝光、BDAV、3D 蓝光、VCD、SVCD 与 XSVCD。"/>
+
+                        <TextBlock Text="支持的格式" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • DVD-Video — 采用 VIDEO_TS 目录结构的标准 DVD 格式，可在全球的 DVD 播放机中播放，要求 MPEG-2 视频与 AC3/DTS/MPEG 音频。&#x0a;  • 蓝光 — 完整的蓝光（BDMV），采用 BDMV 目录结构，支持 H.264/AVC、H.265/HEVC 与 MPEG-2 视频。&#x0a;  • BDAV — 蓝光音视频录制格式，比 BDMV 更简单。&#x0a;  • 3D 蓝光 — 支持 SSIF（立体交错文件格式）的立体 3D 蓝光。&#x0a;  • VCD（Video CD）— 在 CD 介质上使用 MPEG-1 视频的标准清晰度视频，在亚洲地区应用广泛。&#x0a;  • SVCD（Super Video CD）— 在 CD 介质上使用 MPEG-2 视频，画质高于 VCD。&#x0a;  • XSVCD（eXtended Super Video CD）— 扩展参数：在 CD 介质上提供更高码率（最高 3500 kbps）与更高分辨率（最高 720×576）。"/>
+
+                        <TextBlock Text="流程" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  1. 选择目标格式（DVD、蓝光、VCD 等）&#x0a;  2. 选择源视频文件夹（包含 VIDEO_TS、BDMV 或视频文件）&#x0a;  3. 配置设置（光盘标签、区域、目标光驱、写入速度）&#x0a;  4. 核对摘要&#x0a;  5. 执行构建与刻录"/>
+
+                        <Border Classes="InfoCard" Padding="12">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="💡 技术细节" Foreground="#1E90FF" FontWeight="SemiBold" FontSize="11"/>
+                                <TextBlock TextWrapping="Wrap" Foreground="#8EAFC8" FontSize="11" LineHeight="16"
+                                           Text="DVD-Video 制作会生成包含 PCI 与 DSI 数据包的导航包（NV_PCK），用于章节导航。每个 NV_PCK 恰好 2,048 字节：14 字节包头 + 24 字节系统头 + 979 字节 PCI PES + 1,017 字节 DSI PES。DSI 中包含 VOBU_SRI，提供用于特技播放的前向/后向搜索条目。BD 3D 的 SSIF 交错每个区段使用 192 个分配单元（AU = 6,144 字节，区段约 1.2 MB），以实现流畅的立体播放。VCD/SVCD/XSVCD 构建会注入 CD-XA001 标记，并遵循 White Book 规范。"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- ============================================================ -->
+                <!-- DATA WIZARD                                                   -->
+                <!-- ============================================================ -->
+                <Border x:Name="SectionDataWizard" Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="📁 数据光盘向导" Classes="SectionHeader" FontSize="18"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="数据向导引导你从文件与文件夹制作数据光盘，简化了选择文件、选定文件系统和刻录到光盘的流程。"/>
+
+                        <TextBlock Text="任务" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • 构建数据镜像 — 从包含文件的文件夹创建光盘镜像（.iso），可保存后再刻录。&#x0a;  • 构建并刻录到光盘 — 一步完成数据光盘的创建与刻录，不保存中间镜像文件。&#x0a;  • 刻录现有镜像 — 选择已有的光盘镜像文件（.iso、.bin 等）直接刻录到光盘。"/>
+
+                        <TextBlock Text="配置" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • 源文件夹选择&#x0a;  • 光盘类型（CD、DVD、蓝光）&#x0a;  • 文件系统（ISO 9660、Joliet、UDF）&#x0a;  • 卷标&#x0a;  • 写入速度与光驱选择"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- ============================================================ -->
+                <!-- GAME WIZARD                                                   -->
+                <!-- ============================================================ -->
+                <Border x:Name="SectionGameWizard" Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="🎮 游戏光盘向导" Classes="SectionHeader" FontSize="18"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="游戏向导帮助你从镜像文件或文件夹制作游戏光盘，并提供各游戏机专用预设以获得最佳兼容性。"/>
+
+                        <TextBlock Text="源选项" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • 从镜像文件刻录 — 使用已有的游戏光盘镜像（ISO、BIN/CUE、CDI、GDI 等）&#x0a;  • 从文件夹构建 — 使用解包后的游戏文件制作游戏光盘"/>
+
+                        <TextBlock Text="游戏机预设" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="向导内置多种游戏机预设，会自动配置写入模式、扇区大小、子通道处理及其他参数：&#x0a;&#x0a;  • Sony：PlayStation 1、PS2、PS3、PS4/5、PSP（UMD）&#x0a;  • Sega：Saturn、Dreamcast、Mega CD / Sega CD&#x0a;  • Microsoft：Xbox、Xbox 360、Xbox One/Series&#x0a;  • Nintendo：GameCube、Wii、Wii U&#x0a;  • NEC：PC Engine CD / TurboGrafx-CD&#x0a;  • SNK：Neo Geo CD&#x0a;  • Panasonic：3DO Interactive Multiplayer&#x0a;  • Philips：CD-i&#x0a;  • Atari：Jaguar CD&#x0a;  • Commodore：Amiga CD32、CDTV"/>
+
+                        <TextBlock Text="游戏补丁" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • LibCrypt 修补（PS1）— 使用 SBI 文件修正 PS1 游戏的复制保护&#x0a;  • Dreamcast GDI 修补 — 为 Dreamcast 镜像应用格式专用补丁&#x0a;  • 全区修补 — 移除区域锁定&#x0a;  • 引导扇区修补 — 修补引导扇区以兼容修改过固件的设备&#x0a;  • ESR 补丁（PS2 DVD-R）— 注入 DVD-Video 结构以在 PS2 上绕过 MechaCon&#x0a;  • Master Disc 补丁（PS2）— 为 MechaPwn DEX 主机写入 Master Disc 标识&#x0a;  • PSX 80 分钟补丁 — 添加空扇区以兼容 80 分钟 CD-R&#x0a;  • PSX 去抖动补丁（PS1）— 去除 PS1 游戏镜像中的 GPU 抖动"/>
+
+                        <TextBlock Text="PS3 解密" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="选择 PS3 游戏镜像后，向导会提示在刻录前解密。支持三种密钥来源：&#x0a;&#x0a;  • IRD 文件（.ird）— 包含光盘密钥的 ISO Rebuild Data 文件&#x0a;  • 光盘密钥文件（.dkey）— 原始光盘密钥文件&#x0a;  • 十六进制密钥 — 以 32 个十六进制字符直接输入的 16 字节光盘密钥"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- ============================================================ -->
+                <!-- COPY DISC WIZARD                                              -->
+                <!-- ============================================================ -->
+                <Border x:Name="SectionCopyWizard" Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="💿 复制光盘向导" Classes="SectionHeader" FontSize="18"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="复制光盘向导分步引导你将光盘复制为镜像文件，简化了光驱选择、输出配置与读取过程。"/>
+
+                        <TextBlock Text="第 1 步 — 选择源光驱" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="选择装有待复制光盘的光驱。向导会显示光驱详情与介质信息。你也可以选择一个游戏机预设，自动为该平台配置最佳读取设置。"/>
+
+                        <TextBlock Text="第 2 步 — 输出设置" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="配置输出格式（ISO、BIN/CUE 等）、文件路径与读取速度。其他选项包括：&#x0a;&#x0a;  • 复制后校验 — 重新读取光盘并与已保存的镜像比对&#x0a;  • 出错重试 — 自动重试读取失败的扇区（重试 3 次）&#x0a;  • 解密 PS3 光盘 — 复制时使用 IRD 文件（.ird）解密 PS3 游戏光盘"/>
+
+                        <TextBlock Text="第 3 步 — 复制" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="光盘将逐扇区读取，进度条会显示完成百分比、当前读取速度以及实时光盘可视化。操作可随时取消。"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- ============================================================ -->
+                <!-- BLANK DISC WIZARD                                             -->
+                <!-- ============================================================ -->
+                <Border x:Name="SectionBlankWizard" Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="🧹 擦除光盘向导" Classes="SectionHeader" FontSize="18"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="擦除光盘向导分步引导你擦除可重写光盘或格式化空白介质。"/>
+
+                        <TextBlock Text="第 1 步 — 选择光驱" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="选择装有可重写光盘的光驱。向导会显示光驱与介质详情，并在介质不支持擦除时（如 DVD-R、BD-R 等一次写入介质）给出警告。"/>
+
+                        <TextBlock Text="第 2 步 — 擦除选项" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="选择擦除方式：&#x0a;&#x0a;  • 快速擦除 — 仅擦除 TOC/PMA。速度极快（数秒），但旧数据仍留在光盘上，可能被恢复。&#x0a;  • 完全擦除 — 向整个光盘表面写入零。速度慢得多（15–60 分钟以上），但会彻底清除所有数据。&#x0a;&#x0a;兼容介质：CD-RW、DVD-RW、DVD+RW、DVD-RAM、BD-RE、HD DVD-RW。"/>
+
+                        <TextBlock Text="第 3 步 — 擦除" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="擦除操作执行时会显示进度指示与日志输出。快速擦除数秒即可完成，完全擦除可能耗时较长。操作可随时取消。"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- ============================================================ -->
+                <!-- DISC TYPES REFERENCE                                          -->
+                <!-- ============================================================ -->
+                <Border x:Name="SectionDiscTypes" Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="📀 光盘类型参考" Classes="SectionHeader" FontSize="18"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="Open Burning Suite 支持的所有光盘格式的完整指南。"/>
+
+                        <TextBlock Text="CD（Compact Disc）" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • CD-ROM — 只读的工厂压制光盘。容量：650–700 MB（74–80 分钟音频）。&#x0a;  • CD-R（可记录）— 一次写入，只能刻录一次、可多次读取，兼容性最好。&#x0a;  • CD-RW（可重写）— 可擦除并重新记录约 1,000 次，与较旧 CD 播放机的兼容性略差。&#x0a;  • 迷你 CD — 直径 8 cm 的小型光盘。容量：约 185 MB。&#x0a;&#x0a;CD 使用 780 nm 红外激光。数据以单条螺旋轨道由内向外存储。标准扇区大小为 2,048 字节（Mode 1 数据）或 2,352 字节（音频/原始）。"/>
+
+                        <TextBlock Text="DVD（Digital Versatile Disc）" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • DVD-ROM — 只读的工厂压制光盘。&#x0a;  • DVD-R — 一次写入，减号格式。容量：4.7 GB（单层）、8.5 GB（双层 DL）。&#x0a;  • DVD+R — 一次写入，加号格式。容量与 DVD-R 相同，错误处理略好。&#x0a;  • DVD-RW — 可重写，减号格式。可擦除并重新记录约 1,000 次。&#x0a;  • DVD+RW — 可重写，加号格式。无需先擦除即可覆盖写入。&#x0a;  • DVD-RAM — 随机访问的可重写光盘。非常耐用（约 100,000 次重写），部分摄像机和 PVR 使用。&#x0a;&#x0a;DVD 使用 650 nm 红色激光。双层光盘具有两个记录层，通过改变激光焦距访问。"/>
+
+                        <TextBlock Text="HD DVD（High Definition DVD）" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • HD DVD-ROM — 只读。容量：15 GB（SL）、30 GB（DL）。&#x0a;  • HD DVD-R — 一次写入，容量相同。&#x0a;  • HD DVD-RW — 可重写。&#x0a;  • HD DVD-RAM — 随机访问的可重写光盘（4.7 GB）。&#x0a;&#x0a;HD DVD 使用 405 nm 蓝紫激光（与蓝光相同），但在 2008 年的格式之争中败给蓝光。部分较旧的光驱仍支持它。"/>
+
+                        <TextBlock Text="蓝光光盘（BD）" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • BD-ROM — 只读的工厂压制光盘。容量：25 GB（SL）、50 GB（DL）、100 GB（TL BDXL）、128 GB（QL BDXL）。&#x0a;  • BD-R（可记录）— 一次写入，提供 SL、DL、TL（BDXL）与 QL（BDXL）规格。&#x0a;  • BD-RE（可重写）— 可擦除并重新记录，提供 SL、DL、TL（BDXL）与 QL（BDXL）规格。&#x0a;&#x0a;蓝光使用 405 nm 蓝紫激光，轨道间距比 DVD 更密（0.32 µm），可实现更高的数据密度。BD-R 支持顺序记录模式（SRM）与随机记录模式（RRM）。"/>
+
+                        <TextBlock Text="UHD 蓝光（Ultra HD Blu-ray）" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • UHD BD-66 — 双层，容量 66 GB。&#x0a;  • UHD BD-100 — 三层，容量 100 GB。&#x0a;&#x0a;UHD 蓝光相比标准蓝光具有更高密度的坑点与更紧密的轨道。视频内容要求 HEVC（H.265）Main10 Profile，强制 HDR10、BT.2020 广色域，视频码率最高 100 Mbps。使用与标准蓝光相同的 405 nm 蓝紫激光。"/>
+
+                        <TextBlock Text="M-DISC（Millennial Disc）" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="一种特殊的归档格式，将数据刻蚀到类岩石层而非有机染料层中。提供 DVD（4.7 GB）与蓝光（25 GB、50 GB、100 GB）规格。在正常存储条件下标称数据可保存 1,000 年以上。需要支持 M-DISC 的刻录机。"/>
+
+                        <Border Classes="InfoCard" Padding="12">
+                            <StackPanel Spacing="4">
+                                <TextBlock Text="💡 技术细节 — 光盘配置文件" Foreground="#1E90FF" FontWeight="SemiBold" FontSize="11"/>
+                                <TextBlock TextWrapping="Wrap" Foreground="#8EAFC8" FontSize="11" LineHeight="16"
+                                           Text="每种介质类型在 MMC GET CONFIGURATION 指令中由配置文件编号标识。例如：BD-RE = 0x0043、BD-RE DL = 0x0046、BD-RE TL BDXL = 0x004B、BD-RE QL BDXL = 0x004D、BD-R SRM = 0x0041、BD-R RRM = 0x0042、BD-R DL = 0x0045、BD-R TL BDXL = 0x004A、BD-R QL BDXL = 0x004C。所有 BD-RE 规格均支持无需擦除的覆盖写入。"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- ============================================================ -->
+                <!-- FILE SYSTEMS REFERENCE                                        -->
+                <!-- ============================================================ -->
+                <Border x:Name="SectionFileSystems" Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="📂 文件系统参考" Classes="SectionHeader" FontSize="18"/>
+
+                        <TextBlock Text="ISO 9660" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="CD-ROM 与数据光盘的通用标准，由 ECMA-119 / ISO 9660 定义。&#x0a;&#x0a;基础 ISO 9660 Level 1 的限制：&#x0a;  • 文件名：8.3 格式（8 字符名称 + 3 字符扩展名），仅限大写&#x0a;  • 目录深度：最多 8 层&#x0a;  • 文件大小：最大 4 GB（受 32 位扇区寻址限制）&#x0a;&#x0a;ISO 9660 Level 2 允许更长的文件名（最多 31 个字符）与更深的目录。Level 3 增加了多 extent 文件（文件可拆分到不连续的区域）。"/>
+
+                        <TextBlock Text="Joliet" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="Microsoft 对 ISO 9660 的扩展，新增：&#x0a;  • Unicode 文件名（UCS-2 编码）&#x0a;  • 最长 64 个字符的长文件名（启用“Joliet 长文件名”选项后可更长）&#x0a;  • 大小写混合的文件名&#x0a;&#x0a;Joliet 以补充卷描述符的形式与标准 ISO 9660 PVD 并存，因此在支持 Joliet 的系统上光盘仍可读取。"/>
+
+                        <TextBlock Text="UDF (Universal Disc Format)" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="由 ECMA-167 与 OSTA UDF 规范定义的现代、功能丰富的文件系统。&#x0a;&#x0a;  • 无 4 GB 文件大小限制&#x0a;  • 完整的 Unicode 支持&#x0a;  • DVD-Video、蓝光及大型数据光盘必需&#x0a;  • 支持文件权限与扩展属性&#x0a;  • 版本：1.02（DVD-Video）、1.5（DVD-RAM）、2.01（DVD）、2.50（BD）、2.60（BD-R/RE、HD DVD、UHD BD）"/>
+
+                        <TextBlock Text="Rock Ridge" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="面向 POSIX/Unix 系统的 ISO 9660 扩展：&#x0a;  • 长文件名（最多 255 个字符）&#x0a;  • 文件权限（所有者、组、其他）&#x0a;  • 符号链接&#x0a;  • 超过 8 层的深层目录嵌套&#x0a;  • 设备文件&#x0a;&#x0a;常见于 Linux 可引导光盘与安装光盘。"/>
+
+                        <TextBlock Text="HFS / HFS+" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="Apple 为 macOS 提供的文件系统。HFS+（Mac OS Extended）支持 Unicode 文件名、文件权限与资源分支，用于 Mac 可引导光盘以及 Mac/PC 混合光盘。"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- ============================================================ -->
+                <!-- IMAGE FORMATS REFERENCE                                       -->
+                <!-- ============================================================ -->
+                <Border x:Name="SectionImageFormats" Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="💾 光盘镜像格式参考" Classes="SectionHeader" FontSize="18"/>
+
+                        <TextBlock Text="ISO (.iso)" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="最常见、最通用的光盘镜像格式。包含数据区的逐扇区副本，每扇区 2,048 字节。不包含子通道数据，也不以原始形式保存音频轨道。适用于数据光盘、DVD-Video 与蓝光，可在 Windows、Linux 和 macOS 上原生挂载。"/>
+
+                        <TextBlock Text="BIN/CUE (.bin + .cue)" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="一种原始光盘镜像格式。.bin 文件包含原始扇区数据（每扇区 2,352 字节，含同步码、头部、ECC 与 EDC）。.cue 文件是描述光盘布局的文本文件（轨道、区段、索引、预间隙）。音频 CD、混合模式光盘以及需要原始扇区精度的游戏光盘镜像都必须使用该格式。"/>
+
+                        <TextBlock Text="BIN/CUE/SBI (.bin + .cue + .sbi)" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="在 BIN/CUE 基础上附加 SBI（SubChannel Binary Image）文件的格式。SBI 文件仅包含 Q 通道 CRC 被修改的扇区的子通道 Q 数据——具体即 PlayStation 1 游戏使用的 LibCrypt 复制保护。这是 PS1 光盘推荐的归档格式，因为它保留了 DuckStation、Mednafen 等模拟器所需的保护数据。子通道数据以原始模式（RW_RAW）读取，再经后处理提取 LibCrypt 扇区。"/>
+
+                        <TextBlock Text="MDF/MDS (.mdf + .mds)" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="Alcohol 120% 格式。MDF 包含原始光盘数据，MDS 包含光盘结构的元数据。支持子通道数据与多区段光盘。"/>
+
+                        <TextBlock Text="NRG (.nrg)" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="Nero Burning ROM 的专有格式。包含光盘数据，并在文件末尾以分块形式存放元数据。支持音频、数据与混合模式光盘。"/>
+
+                        <TextBlock Text="CDI (.cdi)" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="DiscJuggler 格式。常见于 Sega Dreamcast 游戏镜像，包含原始光盘数据以及末尾的元数据段。"/>
+
+                        <TextBlock Text="CCD/IMG/SUB (.ccd + .img + .sub)" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="CloneCD 格式。CCD 是包含光盘元数据的文本文件，IMG 包含原始扇区数据，SUB 包含子通道数据。非常适合完整保留光盘结构（包括复制保护信息）。"/>
+
+                        <TextBlock Text="GDI (.gdi)" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="Sega Dreamcast GD-ROM 镜像格式。一个文本文件，列出各轨道文件及其类型与扇区大小，专门用于 Dreamcast 游戏保存。"/>
+
+                        <TextBlock Text="TOC/BIN (.toc + .bin)" Foreground="#5BC0FF" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="cdrdao（CD Recording Disc At Once）格式。TOC 文件以 cdrdao 专用的文本格式描述光盘布局，BIN 包含原始数据。"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- ============================================================ -->
+                <!-- GLOSSARY                                                      -->
+                <!-- ============================================================ -->
+                <Border x:Name="SectionGlossary" Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="📘 术语表" Classes="SectionHeader" FontSize="18"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" FontSize="11" LineHeight="18" xml:space="preserve"><Bold>缓存欠载</Bold> — 刻录过程中光驱的写缓存被耗尽，导致刻录失败。现代光驱具备保护机制（BURN-Proof、SafeBurn）可暂停并恢复。
+
+<Bold>CD-TEXT</Bold> — 嵌入音频 CD 子通道中的元数据（艺术家、专辑、轨道标题），由兼容的 CD 播放机显示。
+
+<Bold>CUE 索引文件</Bold> — 描述光盘镜像布局的文本文件：轨道、轨道类型、索引与预间隙。
+
+<Bold>DAO (Disc-At-Once)</Bold> — 一次连续写完整个光盘、过程中不停止激光的写入模式。
+
+<Bold>光盘状态</Bold> — 空白（可写）、可追加（已有区段但还可继续写入）或已完成/已关闭（已封盘，无法再写入）。
+
+<Bold>DL（Dual Layer，双层）</Bold> — 具有两个记录层的光盘，容量约为单层的两倍（例如 DVD DL = 8.5 GB，BD DL = 50 GB）。
+
+<Bold>El Torito</Bold> — 可引导 CD/DVD-ROM 的标准，定义了 BIOS/UEFI 加载的引导目录与引导镜像。
+
+<Bold>封盘</Bold> — 关闭光盘，使其可被任何兼容的光驱或播放机读取。已封盘的光盘无法再追加数据。
+
+<Bold>ISO 9660</Bold> — CD-ROM 的标准文件系统，由 ECMA-119 定义。
+
+<Bold>Joliet</Bold> — Microsoft 对 ISO 9660 的扩展，提供 Unicode 与长文件名支持。
+
+<Bold>LBA（Logical Block Address，逻辑块地址）</Bold> — 光盘上扇区的顺序编号，从 0 开始，用于定位光盘上的数据。
+
+<Bold>导入区 / 导出区</Bold> — 光盘上每个区段开头与结尾的特殊区域。导入区包含 TOC。
+
+<Bold>LibCrypt</Bold> — 部分 PlayStation 1 游戏使用的复制保护，存放在子通道数据中。
+
+<Bold>M-DISC</Bold> — M-DISC 归档盘——标称数据可保存 1,000 年以上的归档介质。
+
+<Bold>MMC (Multi-Media Commands)</Bold> — 用于控制光驱的 SCSI 指令集。
+
+<Bold>多区段</Bold> — 包含多个区段的光盘。每个区段都有自己的导入区与导出区，因而可以分次追加数据。
+
+<Bold>超刻</Bold> — 写入超出光盘标称容量的数据。有风险，但有时可行。
+
+<Bold>PVD（Primary Volume Descriptor，主卷描述符）</Bold> — ISO 9660 文件系统中的主要元数据结构，位于第 16 扇区。
+
+<Bold>原始扇区</Bold> — 完整的 2,352 字节扇区，包含同步模式、头部、用户数据、ECC 与 EDC。
+
+<Bold>Rock Ridge</Bold> — ISO 9660 的扩展，用于提供 POSIX 元数据（长文件名、权限、符号链接）。
+
+<Bold>SBI 文件</Bold> — SubChannel Binary Image——包含受 LibCrypt 保护的 PlayStation 1 游戏的子通道数据。
+
+<Bold>SCSI</Bold> — Small Computer System Interface——与光驱通信所使用的协议。
+
+<Bold>区段</Bold> — 光盘上一个独立的记录单元，具有自己的导入区、程序区与导出区。
+
+<Bold>子通道</Bold> — CD 上与主数据并存的数据通道（P 至 W），用于计时、CD-TEXT 文本、复制保护及其他元数据。
+
+<Bold>TAO (Track-At-Once)</Bold> — 逐条写入轨道、轨道之间留有间隙的写入模式。
+
+<Bold>TOC（Table of Contents，目录）</Bold> — 导入区中的数据，列出光盘上所有轨道及其位置与类型。
+
+<Bold>轨道</Bold> — 光盘上一段连续的数据。一张光盘可包含多条轨道（例如多条音频轨道 + 一条数据轨道）。
+
+<Bold>UDF (Universal Disc Format)</Bold> — 用于光盘介质的现代文件系统，DVD-Video 与蓝光必需。
+
+<Bold>VOBU（Video Object Unit，视频对象单元）</Bold> — DVD-Video 数据流中最小的可寻址单元，通常为 0.4–1.0 秒的视频。</TextBlock>
+                    </StackPanel>
+                </Border>
+
+                <!-- ============================================================ -->
+                <!-- TROUBLESHOOTING                                               -->
+                <!-- ============================================================ -->
+                <Border x:Name="SectionTroubleshooting" Classes="Card">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="🔧 故障排查" Classes="SectionHeader" FontSize="18"/>
+
+                        <TextBlock Text="未检测到光驱" Foreground="#FF8C00" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • 确认光驱已连接并已通电&#x0a;  • Windows：以管理员身份运行本应用&#x0a;  • Linux：使用 sudo 运行，或确保当前用户属于“cdrom”和“optical”用户组&#x0a;  • macOS：使用 sudo 运行&#x0a;  • 尝试点击“刷新光驱”重新扫描&#x0a;  • 检查光驱是否出现在操作系统的设备管理器中"/>
+
+                        <TextBlock Text="刻录失败或产生废盘" Foreground="#FF8C00" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • 降低写入速度——高速更容易出错&#x0a;  • 确认已启用缓存欠载保护&#x0a;  • 尝试其他品牌的介质——某些光驱对特定品牌兼容性更好&#x0a;  • 关闭可能中断刻录过程的其他应用程序&#x0a;  • 检查光盘是否损坏或已过期（有机染料会随时间劣化）&#x0a;  • 对于可重写介质，写入前先尝试完全擦除"/>
+
+                        <TextBlock Text="“未提权”警告" Foreground="#FF8C00" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="许多操作需要直接访问硬件：&#x0a;  • Windows：右键点击应用 → 以管理员身份运行&#x0a;  • Linux：使用“sudo”运行，或为光驱配置 udev 规则&#x0a;  • macOS：在终端中使用“sudo”运行"/>
+
+                        <TextBlock Text="光盘无法识别或介质类型错误" Foreground="#FF8C00" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • 弹出并重新放入光盘&#x0a;  • 再次点击“刷新光驱”和“探测介质”&#x0a;  • 光盘可能已损坏、有污渍，或与光驱不兼容&#x0a;  • 如果光驱误判介质，可尝试高级设置中的“强制介质类型”选项"/>
+
+                        <TextBlock Text="音频 CD 抓取有爆音或杂音" Foreground="#FF8C00" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • 启用音频精确抓取模式以获得最强纠错&#x0a;  • 启用抖动校正&#x0a;  • 将读取速度降至 4x 或 8x&#x0a;  • 将重试次数提高到 10 次或更多&#x0a;  • 从中心向边缘轻轻清洁光盘表面（切勿做圆周擦拭）"/>
+
+                        <TextBlock Text="刻录成功但校验失败" Foreground="#FF8C00" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • 这可能说明介质质量处于临界状态——请换一张光盘重试&#x0a;  • 降低写入速度后重新刻录&#x0a;  • 部分光驱的回读行为略有差异——可换一台光驱进行校验&#x0a;  • 确认在刻录与校验之间没有取出并重新放入光盘&#x0a;  • 对于混合模式 CD（如 PS1 游戏），确认使用原始 CUE 索引文件进行比对——正确处理预间隙与轨道边界需要 CUE 布局信息&#x0a;  • 校验带音轨的混合模式光盘时，启用音频轨道校验，以便将所有扇区纳入比对"/>
+
+                        <TextBlock Text="游戏光盘在主机上无法运行" Foreground="#FF8C00" FontWeight="SemiBold" FontSize="13"/>
+                        <TextBlock TextWrapping="Wrap" Foreground="#C8D8E8" LineHeight="22"
+                                   Text="  • 确认已选择正确的游戏机预设&#x0a;  • 使用 DAO（Disc-At-Once）写入模式——TAO 会引入间隙，破坏许多游戏格式&#x0a;  • 带 LibCrypt 保护的 PS1 游戏需要正确的 .sbi 文件&#x0a;  • CDI/GDI 格式的 Dreamcast 游戏需要启用相应的修补&#x0a;  • 使用较低的写入速度（4x–8x）以获得最佳兼容性&#x0a;  • 使用“校验”视图确认源镜像是正确的转储"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Bottom spacer for comfortable scrolling -->
+                <Border Height="20"/>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
