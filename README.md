@@ -9,6 +9,10 @@
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-blue)]()
 [![Localization](https://img.shields.io/badge/Localization-Simplified_Chinese-green)]()
 
+**基于官方原版最新源码编译制作 (Based on the latest official source code)**
+
+👉 **[点击这里访问原作者官方仓库 (Original Repository)](https://github.com/marcelofrau/OpenBurningSuite)**
+
 <img src="/Screenshots/Home.png" width="75%">
 
 </div>
@@ -32,7 +36,17 @@
 
 ---
 
-## 📖 关于 (About)
+## 🔗 开源关联与致谢 (Credits & Relation)
+
+- **原始仓库 (Original Repo)**: [marcelofrau/OpenBurningSuite](https://github.com/marcelofrau/OpenBurningSuite) *(Active Fork)*
+- **最初作者 (Original Creator)**: [SvenGDK/OpenBurningSuite](https://github.com/SvenGDK/OpenBurningSuite)
+- **汉化与维护 (Localization)**: Mr. Fu
+
+**本项目是基于上述官方开源代码的衍生汉化分支 (Derivative Fork)。** 我们严格遵循原项目的开源精神，仅对用户界面（UI）进行了简体中文本地化，并进行了深度测试。若您想查阅最新功能开发或提交底层代码 Issue，请前往上述**原作者的官方仓库**。
+
+---
+
+## 📖 关于原软件 (About)
 
 **Open Burning Suite** 是一款适用于 **Windows**、**Linux** 和 **macOS** 的免费开源光盘刻录应用程序。你可以通过一个应用完成 CD、DVD、HD DVD 和蓝光光盘的刻录、复制、创建与校验。针对音频、视频、数据和游戏光盘，它提供了分步向导，方便新手快速上手；同时，高级选项也为经验丰富的用户提供了全面的控制权。
 
@@ -55,8 +69,6 @@
 | 🔒 | **加密 (Encryption)** | 采用 AES-256-CBC 光盘镜像加密，带密码保护 (.obse 格式) · PS3 光盘解密 (IRD/dkey/hex) |
 | 🧙 | **向导 (Wizards)** | 针对音频、视频、数据、游戏、复制和空白/擦除光盘的分步快速入门向导 |
 
-查看 [完整文档](https://svengdk.github.io/OpenBurningSuite/) 了解每个功能的详细指南。
-
 ---
 
 ## 💽 支持的介质 (Supported Media)
@@ -68,11 +80,9 @@
 - **UHD 蓝光：** UHD BD-66, UHD BD-100
 - **M-DISC：** DVD, BD-R (单层/双层/三层)
 
-查看 [支持格式](https://svengdk.github.io/OpenBurningSuite/supported-formats) 获取完整参考。
-
 ---
 
 ## 📄 许可证与汉化声明 (License & Localization)
 
 - **原软件**：基于 **BSD 2-Clause License** 分发。请参阅原始 [`LICENSE`](LICENSE) 获取更多信息。
-- **汉化说明**：本仓库提供的汉化文本、排版优化及重打包程序，其相关权利归 **Mr. Fu** 所有。**严禁将本汉化包用于任何商业倒卖。**
+- **汉化说明**：本仓库提供的汉化文本、排版优化及重打包程序，其相关权利归 **Mr. Fu** 所有。**严禁将本汉化包用于任何商业倒卖。** 若原作者认为本仓库的内容侵犯了其权益，请联系我，我将立即无条件下线。
