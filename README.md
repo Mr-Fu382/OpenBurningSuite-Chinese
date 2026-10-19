@@ -2,11 +2,12 @@
 
 <img src="OpenBurningSuite/icon.png" width="128px">
 
-# Open Burning Suite
+# Open Burning Suite (简体中文版)
 
 [![.NET 8.0](https://img.shields.io/badge/.NET-8.0-512BD4?logo=dotnet)](https://dotnet.microsoft.com/)
 [![License: BSD-2-Clause](https://img.shields.io/badge/License-BSD_2--Clause-orange.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-blue)]()
+[![Localization](https://img.shields.io/badge/Localization-Simplified_Chinese-green)]()
 
 <img src="/Screenshots/Home.png" width="75%">
 
@@ -14,54 +15,64 @@
 
 ---
 
-## About
+## 📥 极速下载 (Download Now)
 
-**Open Burning Suite** is a free, open-source disc burning application for **Windows**, **Linux**, and **macOS**. It lets you burn, copy, create, and verify CDs, DVDs, HD DVDs, and Blu-ray discs — all from one app. Step-by-step wizards for audio, video, data, and gaming discs make it easy to get started, while advanced options give experienced users full control.
+**本汉化版由初中生开发者 Mr. Fu 独立编译制作，托管于 Cloudflare R2 全球极速 CDN。**
 
-Under the hood, Open Burning Suite talks directly to your optical drive using native **SCSI/MMC commands**, so there are no external tools to install. It's built with **.NET 8** and **Avalonia UI** for a modern look and feel on every platform.
+为了方便不同需求的用户，提供了以下两种环境的四个版本，请根据需要选择：
+
+| 类型 | 推荐人群 | 下载链接 |
+| :--- | :--- | :--- |
+| 🚀 **免安装绿色版 (独立版)**<br>*(自带 .NET 8，解压即用)* | **强烈推荐小白下载**，无需配置任何环境。 | [📦 下载 ZIP](https://github-download.1253510.com/OpenBurningSuite中文版/1.0.0/OpenBurningSuite-Chinese-独立版-自带%20.NET%208.zip) |
+| 💿 **安装程序版 (独立版)**<br>*(自带 .NET 8)* | 喜欢“下一步”安装到系统的用户。 | [⬇️ 下载 EXE](https://github-download.1253510.com/OpenBurningSuite中文版/1.0.0/OpenBurningSuite-汉化版-独立版-自带%20.NET%208.exe) |
+| 🍃 **免安装绿色版 (依赖版)**<br>*(需自备 .NET 8)* | 追求小体积，且电脑已装运行库的用户。 | [📦 下载 ZIP](https://github-download.1253510.com/OpenBurningSuite中文版/1.0.0/OpenBurningSuite-Chinese-需要%20.NET%208%20Desktop%20Runtime.zip) |
+| ⚙️ **安装程序版 (依赖版)**<br>*(需自备 .NET 8)* | 体积最小，但未装运行库会报错。 | [⬇️ 下载 EXE](https://github-download.1253510.com/OpenBurningSuite中文版/1.0.0/OpenBurningSuite-汉化版-需要%20.NET%208%20Desktop%20Runtime.exe) |
+
+> **⚠️ 运行提示：** 如果你下载的版本提示缺少 `.NET`，请前往微软官网下载安装 [.NET 8 Desktop Runtime](https://dotnet.microsoft.com/zh-cn/download/dotnet/8.0)。如遇问题，欢迎前往 [项目分发中心](https://github.com/Mr-Fu382/links-hub) 提交反馈。
 
 ---
 
-## Features
+## 📖 关于 (About)
 
-| | Feature | Highlights |
+**Open Burning Suite** 是一款适用于 **Windows**、**Linux** 和 **macOS** 的免费开源光盘刻录应用程序。你可以通过一个应用完成 CD、DVD、HD DVD 和蓝光光盘的刻录、复制、创建与校验。针对音频、视频、数据和游戏光盘，它提供了分步向导，方便新手快速上手；同时，高级选项也为经验丰富的用户提供了全面的控制权。
+
+在底层，Open Burning Suite 使用原生 **SCSI/MMC 命令**直接与你的光驱通信，因此无需安装任何外部工具。它基于 **.NET 8** 和 **Avalonia UI** 构建，在每个平台上都能提供现代感十足的观感。
+
+---
+
+## ✨ 功能 (Features)
+
+| | 功能 | 亮点 |
 |:--:|:--------|:-----------|
-| 🔥 | **Burn** | CD-R/RW, DVD±R/RW, DVD-RAM, HD DVD, BD-R/RE, BDXL, M-DISC · TAO/SAO/DAO/RAW write modes · Build on the fly · Multi-copy · Simulation · Overburn · CUE sheets |
-| 💿 | **Read** | ISO, BIN/CUE, CCD/IMG/SUB, TOC/BIN, NRG, MDF/MDS, IMG, CDI output · Raw 2352-byte sectors · Subchannel extraction · Audio paranoia · Gaming presets |
-| 🏗 | **Build** | ISO 9660, Joliet, UDF, Rock Ridge, HFS+ filesystems · El Torito bootable discs · VCD/SVCD/XSVCD |
-| 🎵 | **Audio** | Create audio CDs with CD-TEXT · Rip audio CDs to WAV or BIN/CUE · Copy music files to disc · Import M3U, PLS, WPL, ASX playlists |
-| 🎬 | **Video** | DVD-Video authoring (VIDEO_TS) · Blu-ray BDMV · BDAV recording format · Blu-ray 3D (MVC/SBS/TAB) · FFmpeg-based transcoding |
-| ✅ | **Verify** | Sector-by-sector integrity · Disc-to-image comparison · CRC32, MD5, SHA-1, SHA-256, SHA-512 checksums |
-| 🎮 | **Gaming** | PlayStation 1–5, PSP · GameCube, Wii, Wii U · Dreamcast, Saturn, Mega CD · Xbox, Xbox 360, Xbox One/Series · Neo Geo CD, 3DO, CD-i, PC Engine, Amiga CD32/CDTV, Atari Jaguar CD · LibCrypt, region-free & boot-sector patching |
-| ⚙️ | **Advanced** | Disc erase & format (quick/full) · Eject/load tray · Finalization · M-DISC archival · Real-time disc visualization |
-| 🔒 | **Encryption** | AES-256-CBC disc image encryption with password protection (.obse format) · PS3 disc decryption (IRD/dkey/hex) |
-| 🧙 | **Wizards** | Step-by-step Quick Start wizards for Audio, Video, Data, Gaming, Copy, and Blank/Erase discs |
+| 🔥 | **刻录 (Burn)** | CD-R/RW, DVD±R/RW, DVD-RAM, HD DVD, BD-R/RE, BDXL, M-DISC · TAO/SAO/DAO/RAW 写入模式 · 动态构建 · 多份刻录 · 模拟刻录 · 超刻 · CUE 索引表 |
+| 💿 | **读取 (Read)** | 输出 ISO, BIN/CUE, CCD/IMG/SUB, TOC/BIN, NRG, MDF/MDS, IMG, CDI · 原生 2352 字节扇区 · 子通道提取 · 精确音频抓取 · 游戏预设 |
+| 🏗 | **构建 (Build)** | ISO 9660, Joliet, UDF, Rock Ridge, HFS+ 文件系统 · El Torito 引导光盘 · VCD/SVCD/XSVCD |
+| 🎵 | **音频 (Audio)** | 制作带 CD-TEXT 的音频 CD · 将音频 CD 抓取为 WAV 或 BIN/CUE · 将音乐文件刻录到光盘 · 导入 M3U, PLS, WPL, ASX 播放列表 |
+| 🎬 | **视频 (Video)** | DVD-Video 创作 (VIDEO_TS) · 蓝光 BDMV · BDAV 刻录格式 · 蓝光 3D (MVC/SBS/TAB) · 基于 FFmpeg 的转码 |
+| ✅ | **校验 (Verify)** | 逐扇区完整性校验 · 光盘与镜像比对 · CRC32, MD5, SHA-1, SHA-256, SHA-512 校验和 |
+| 🎮 | **游戏 (Gaming)** | PlayStation 1–5, PSP · GameCube, Wii, Wii U · Dreamcast, Saturn, Mega CD · Xbox, Xbox 360, Xbox One/Series · Neo Geo CD, 3DO, CD-i, PC Engine, Amiga CD32/CDTV, Atari Jaguar CD · LibCrypt, 全区及引导扇区补丁 |
+| ⚙️ | **高级 (Advanced)** | 光盘擦除与格式化 (快速/完整) · 弹出/加载托盘 · 封盘 · M-DISC 归档 · 实时光盘可视化 |
+| 🔒 | **加密 (Encryption)** | 采用 AES-256-CBC 光盘镜像加密，带密码保护 (.obse 格式) · PS3 光盘解密 (IRD/dkey/hex) |
+| 🧙 | **向导 (Wizards)** | 针对音频、视频、数据、游戏、复制和空白/擦除光盘的分步快速入门向导 |
 
-See the [full documentation](https://svengdk.github.io/OpenBurningSuite/) for detailed guides on each feature.
-
----
-
-## Supported Media
-
-- **CD:** CD-R/RW (74, 80, 90, 99 min)
-- **DVD:** DVD±R/RW, DVD-R DL, DVD+R DL, DVD-RAM
-- **HD DVD:** HD DVD-R/RW/RAM (SL/DL)
-- **Blu-ray:** BD-R/RE (25–128 GB, BDXL)
-- **UHD Blu-ray:** UHD BD-66, UHD BD-100
-- **M-DISC:** DVD, BD-R (SL/DL/XL)
-
-See [Supported Formats](https://svengdk.github.io/OpenBurningSuite/supported-formats) for the complete reference.
+查看 [完整文档](https://svengdk.github.io/OpenBurningSuite/) 了解每个功能的详细指南。
 
 ---
 
-## Platform Guides
+## 💽 支持的介质 (Supported Media)
 
-- **Windows** — Run the application as Administrator for SCSI passthrough access.
-- **Linux** — See [LINUX.md](LINUX.md) for DEB, RPM, APK, Pacman, AppImage, Snap, Flatpak instructions, and SCSI permissions setup.
-- **macOS** — See [macOS.md](macOS.md) for PKG, DMG, Gatekeeper instructions, and IOKit SCSI access.
+- **CD：** CD-R/RW (74, 80, 90, 99 分钟)
+- **DVD：** DVD±R/RW, DVD-R DL, DVD+R DL, DVD-RAM
+- **HD DVD：** HD DVD-R/RW/RAM (单层/双层)
+- **蓝光：** BD-R/RE (25–128 GB, BDXL)
+- **UHD 蓝光：** UHD BD-66, UHD BD-100
+- **M-DISC：** DVD, BD-R (单层/双层/三层)
+
+查看 [支持格式](https://svengdk.github.io/OpenBurningSuite/supported-formats) 获取完整参考。
 
 ---
 
-## License
+## 📄 许可证与汉化声明 (License & Localization)
 
-Distributed under the **BSD 2-Clause License**. See [`LICENSE`](LICENSE) for more information.
+- **原软件**：基于 **BSD 2-Clause License** 分发。请参阅原始 [`LICENSE`](LICENSE) 获取更多信息。
+- **汉化说明**：本仓库提供的汉化文本、排版优化及重打包程序，其相关权利归 **Mr. Fu** 所有。**严禁将本汉化包用于任何商业倒卖。**
