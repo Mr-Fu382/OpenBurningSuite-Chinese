@@ -8,6 +8,7 @@
 [![License: BSD-2-Clause](https://img.shields.io/badge/License-BSD_2--Clause-orange.svg)](LICENSE)
 [![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-blue)]()
 [![Localization](https://img.shields.io/badge/Localization-Simplified_Chinese-green)]()
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Mr-Fu382/OpenBurningSuite-Chinese?color=blue&label=Release)](https://github.com/Mr-Fu382/OpenBurningSuite-Chinese/releases)
 
 **基于官方原版最新源码编译制作 (Based on the latest official source code)**
 
@@ -21,22 +22,25 @@
 
 ## 📥 极速下载 (Download Now)
 
-**本汉化版由初中生开发者 Mr. Fu 独立编译制作，托管于 Cloudflare R2 全球极速 CDN。**
+**本汉化版由初中生开发者 Mr. Fu 独立编译制作。**
 
-> [!IMPORTANT]  
-> **如果下方的直链点击没反应、或者下载速度极慢，请立刻点击备用通道！**
-> 👉 **[前往本作者的专属下载中心获取备用链接 (Backup Download Center)](https://github.com/Mr-Fu382/links-hub)**
+### 主下载渠道 (GitHub Releases)
+👉 **[点击此处，前往 Releases 页面底部的 Assets 附件区下载](https://github.com/Mr-Fu382/OpenBurningSuite-Chinese/releases/tag/v1.0.0)**
 
-为了方便不同需求的用户，提供了以下两种环境的四个版本，请根据需要选择：
+> 请将页面稍微向下滑动，找到 `Assets` 区域，点击所需的安装包即可下载。
+> *(注：如果您在国内，发现 GitHub 下载速度极慢或断开，请直接使用下方的备用通道)*
 
-| 类型 | 推荐人群 | 下载链接 |
+### ⚡ 备用极速通道 (Cloudflare R2 全球 CDN)
+**国内用户强烈建议使用以下 R2 极速直链，拒绝龟速！**
+
+| 类型 | 推荐人群 | 极速下载直链 |
 | :--- | :--- | :--- |
-| 🚀 **免安装绿色版 (独立版)**<br>*(自带 .NET 8，解压即用)* | **强烈推荐小白下载**，无需配置任何环境。 | [📦 下载 ZIP](https://github-download.1253510.com/OpenBurningSuite中文版/1.0.0/OpenBurningSuite-Chinese-独立版-自带%20.NET%208.zip) |
-| 💿 **安装程序版 (独立版)**<br>*(自带 .NET 8)* | 喜欢“下一步”安装到系统的用户。 | [⬇️ 下载 EXE](https://github-download.1253510.com/OpenBurningSuite中文版/1.0.0/OpenBurningSuite-汉化版-独立版-自带%20.NET%208.exe) |
-| 🍃 **免安装绿色版 (依赖版)**<br>*(需自备 .NET 8)* | 追求小体积，且电脑已装运行库的用户。 | [📦 下载 ZIP](https://github-download.1253510.com/OpenBurningSuite中文版/1.0.0/OpenBurningSuite-Chinese-需要%20.NET%208%20Desktop%20Runtime.zip) |
-| ⚙️ **安装程序版 (依赖版)**<br>*(需自备 .NET 8)* | 体积最小，但未装运行库会报错。 | [⬇️ 下载 EXE](https://github-download.1253510.com/OpenBurningSuite中文版/1.0.0/OpenBurningSuite-汉化版-需要%20.NET%208%20Desktop%20Runtime.exe) |
+| 🚀 **免安装绿色版 (独立版)**<br>*(自带 .NET 8，解压即用)* | **强烈推荐小白下载**，无需配置环境。 | [📦 点击下载 ZIP](https://github-download.1253510.com/OpenBurningSuite中文版/1.0.0/OpenBurningSuite-Chinese-独立版-自带%20.NET%208.zip) |
+| 💿 **安装程序版 (独立版)**<br>*(自带 .NET 8)* | 喜欢“下一步”安装到系统的用户。 | [⬇️ 点击下载 EXE](https://github-download.1253510.com/OpenBurningSuite中文版/1.0.0/OpenBurningSuite-汉化版-独立版-自带%20.NET%208.exe) |
+| 🍃 **免安装绿色版 (依赖版)**<br>*(需自备 .NET 8)* | 追求小体积，且电脑已装运行库。 | [📦 点击下载 ZIP](https://github-download.1253510.com/OpenBurningSuite中文版/1.0.0/OpenBurningSuite-Chinese-需要%20.NET%208%20Desktop%20Runtime.zip) |
+| ⚙️ **安装程序版 (依赖版)**<br>*(需自备 .NET 8)* | 体积最小，但未装运行库会报错。 | [⬇️ 点击下载 EXE](https://github-download.1253510.com/OpenBurningSuite中文版/1.0.0/OpenBurningSuite-汉化版-需要%20.NET%208%20Desktop%20Runtime.exe) |
 
-> **⚠️ 运行提示：** 如果你下载的版本提示缺少 `.NET`，请前往微软官网下载安装 [.NET 8 Desktop Runtime](https://dotnet.microsoft.com/zh-cn/download/dotnet/8.0)。如遇问题，欢迎前往 **[本作者的专属宝库 (Mr. Fu's Asset Hub)](https://github.com/Mr-Fu382/links-hub)** 提交反馈。
+> **⚠️ 运行提示：** 如果你下载的版本提示缺少 `.NET`，请前往微软官网下载安装 [.NET 8 Desktop Runtime](https://dotnet.microsoft.com/zh-cn/download/dotnet/8.0)。
 
 ---
 
