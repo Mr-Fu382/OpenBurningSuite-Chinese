@@ -3,7 +3,7 @@ name: Build and Release All Platforms
 on:
   push:
     tags:
-      - 'v*' # 只有在推送 v 开头的 tag 时才触发，比如 v1.0.1
+      - 'v*'
 
 permissions:
   contents: write
@@ -21,12 +21,12 @@ jobs:
           - os: macos-latest
             rid: osx-arm64
             artifact_name: OpenBurningSuite-macOS-arm64.zip
-          - os: macos-13 # 老款 Intel Mac 环境
+          - os: macos-13
             rid: osx-x64
             artifact_name: OpenBurningSuite-macOS-x64.zip
           - os: ubuntu-latest
             rid: linux-x64
-            artifact_name: OpenBurningSuite-Linux-x64
+            artifact_name: OpenBurningSuite-Linux-x64.tar.gz
 
     steps:
       - name: Checkout Code
@@ -38,48 +38,23 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Publish App
-        run: dotnet publish OpenBurningSuite/OpenBurningSuite.csproj -c Release -r ${{ matrix.rid }} --self-contained true -p:PublishSingleFile=false -o ./publish_output
+        run: dotnet publish OpenBurningSuite/OpenBurningSuite.csproj -c Release -r ${{ matrix.rid }} --self-contained true -o ./publish_output
 
-      # ----- Windows 打包 -----
       - name: Zip Package (Windows)
         if: matrix.os == 'windows-latest'
         run: Compress-Archive -Path ./publish_output/* -DestinationPath ./${{ matrix.artifact_name }}
 
-      # ----- macOS 打包 -----
       - name: Zip Package (macOS)
         if: startsWith(matrix.os, 'macos')
         run: cd publish_output && zip -r ../${{ matrix.artifact_name }} ./*
 
-      # ----- Linux 打包 (deb, rpm, AppImage) -----
-      - name: Package Linux (deb/rpm/AppImage)
+      - name: Tar Package (Linux)
         if: matrix.os == 'ubuntu-latest'
-        run: |
-          cd publish_output
-          # 下载打包工具
-          sudo apt-get update && sudo apt-get install -y rpm
-          wget -c https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage
-          chmod +x appimagetool-x86_64.AppImage
-          
-          # 生成 deb
-          mkdir -p OpenBurningSuite/DEBIAN
-          echo -e "Package: openburningsuite\nVersion: 1.0.0\nArchitecture: amd64\nMaintainer: Mr.Fu\nDescription: Open Burning Suite Chinese Localization" > OpenBurningSuite/DEBIAN/control
-          cp -r * OpenBurningSuite/usr/bin/ || true
-          dpkg-deb --build OpenBurningSuite ../OpenBurningSuite-Linux-x64.deb
-          
-          # 生成 AppImage
-          mkdir -p AppDir/usr/bin
-          cp -r * AppDir/usr/bin/
-          echo -e "[Desktop Entry]\nName=OpenBurningSuite\nExec=OpenBurningSuite\nIcon=OpenBurningSuite\nType=Application\nCategories=Utility;" > AppDir/OpenBurningSuite.desktop
-          cp OpenBurningSuite.png AppDir/ || true
-          ./appimagetool-x86_64.AppImage AppDir ../OpenBurningSuite-Linux-x64.AppImage
-          
-          # 生成 Zip
-          cd .. && zip -r ${{ matrix.artifact_name }}.zip publish_output/*
+        run: cd publish_output && tar -czvf ../${{ matrix.artifact_name }} ./*
 
       - name: Upload Artifacts to Release
         uses: softprops/action-gh-release@v1
         with:
-          files: |
-            ./${{ matrix.artifact_name }}*
+          files: ./${{ matrix.artifact_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
